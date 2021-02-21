@@ -27,7 +27,7 @@ const makeLinkNode = function (id, img, nick) {
     linkNode.href = "#" + id;
 
     let imgNode = document.createElement("img");
-    imgNode.src = "/assets/image/ID_Photos/" + img;
+    imgNode.src = "assets/image/ID_Photos/" + img;
     imgNode.alt = "Photo de " + img;
     imgNode.className = "frame_photograph_link_img";
 
