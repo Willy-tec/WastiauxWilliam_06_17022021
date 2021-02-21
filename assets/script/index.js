@@ -116,3 +116,9 @@ window.onscroll = function(){
     if(document.documentElement.scrollTop > 10) banner_link.classList.remove("hide");
     else banner_link.classList.add("hide")
 }
+
+banner_link.addEventListener("click",(evt)=>{
+    evt.preventDefault();
+    document.documentElement.scrollTop = 0;
+
+})

@@ -47,10 +47,13 @@ html {
   text-decoration: none;
   color: black;
   z-index: 10;
+  -webkit-transition: opacity 250ms;
+  transition: opacity 250ms;
+  opacity: 1;
 }
 
 .banner_link.hide {
-  display: none;
+  opacity: 0;
 }
 
 .banner_nav {
