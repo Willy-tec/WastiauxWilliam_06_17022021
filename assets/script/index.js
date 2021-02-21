@@ -62,7 +62,7 @@ const makeTagList = function (data) {
     return tagArray;
 };
 
-let requestURL = "/assets/script/FishEyeDataFR.json";
+let requestURL = "assets/script/FishEyeDataFR.json";
 let request = new XMLHttpRequest();
 request.open('GET', requestURL);
 request.responseType = "json";
