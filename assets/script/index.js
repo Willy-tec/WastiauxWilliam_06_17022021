@@ -1,5 +1,9 @@
 console.clear()
 
+let data = null;
+let userArray = [];
+let banner_link = document.getElementById("banner_link");
+
 const photographFrame = function (img, id, nick, localization, quote, price, taglist) {
 
     let photographNode = makeNode("article", "frame_photograph");
@@ -24,7 +28,7 @@ const makeLinkNode = function (id, img, nick) {
 
     let linkNode = document.createElement("a");
     linkNode.className = "frame_photograph_link"
-    linkNode.href = "#" + id;
+    linkNode.href ="assets/html/" + id+".html";
 
     let imgNode = document.createElement("img");
     imgNode.src = "assets/image/ID_Photos/" + img;
@@ -62,20 +66,53 @@ const makeTagList = function (data) {
     return tagArray;
 };
 
-let requestURL = "assets/script/FishEyeDataFR.json";
-let request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = "json";
-request.send();
-
-request.onload = function () {
-    let data = request.response;
+const fillPageWithPhotograph = function(data){
     let frame = document.getElementById("frame");
-    let userArray = [];
     data["photographers"].forEach(elt => {
         userArray.push(photographFrame(elt.portrait, elt.id, elt.name, elt.country, elt.tagline, elt.price, elt.tags))
     });
     userArray.forEach(x => frame.appendChild(x));
     let banner_tag = document.getElementsByClassName("banner_nav")[0];
     banner_tag.appendChild(makeTaglistNode(makeTagList(data), "banner_nav_list"));
+    console.log(userArray)
+}
+
+const fillPageWithPhotographByTag = function(data, tag){
+    clearUserArray();
+    let frame = document.getElementById("frame");
+    data["photographers"].forEach(elt => {
+        if(elt.tags.indexOf(tag)!=-1) userArray.push(photographFrame(elt.portrait, elt.id, elt.name, elt.country, elt.tagline, elt.price, elt.tags))
+    });
+    userArray.forEach(x => frame.appendChild(x));
+}
+
+const clearUserArray = function(){
+    console.clear();
+    userArray.forEach(x =>{
+       document.getElementById("frame").removeChild(x);
+    } )
+    userArray = [];
+}
+
+let requestURL = "assets/script/FishEyeDataFR.json";
+let request = new XMLHttpRequest();
+request.open('GET', requestURL);
+request.responseType = "json";
+request.send();
+
+
+request.onload = function () {
+    data = request.response;
+    fillPageWithPhotograph(data);
+}
+
+window.addEventListener("popstate", (evt)=>{
+    console.log(window.location.hash.slice(1))
+    if(data != null) fillPageWithPhotographByTag(data, window.location.hash.slice(1) )
+})
+
+window.onscroll = function(){
+    console.log(document.documentElement.scrollTop);
+    if(document.documentElement.scrollTop > 10) banner_link.classList.remove("hide");
+    else banner_link.classList.add("hide")
 }

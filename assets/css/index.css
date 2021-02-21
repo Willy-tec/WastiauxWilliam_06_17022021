@@ -6,6 +6,7 @@
 html {
   font-family: "DM Sans", sans-serif;
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 .banner {
@@ -34,10 +35,10 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
+  position: fixed;
   width: 17rem;
   height: 3rem;
-  left: 70%;
+  left: 45%;
   top: 1rem;
   background: #db8876;
   border-radius: .5rem;
@@ -45,6 +46,7 @@ html {
   font-weight: 700;
   text-decoration: none;
   color: black;
+  z-index: 10;
 }
 
 .banner_link.hide {
@@ -138,6 +140,9 @@ main .frame_photograph {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 2 30%;
+          flex: 1 2 30%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -173,6 +178,8 @@ main .frame_photograph_link_img {
      object-fit: cover;
   border-radius: 50%;
   image-rendering: auto;
+  -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 main .frame_photograph_link_name {
