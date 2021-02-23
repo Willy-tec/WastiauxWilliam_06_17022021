@@ -11,12 +11,13 @@ $color_border: #C4C4C4
 *
     margin: 0
     padding: 0
+    box-sizing: border-box
 
 @mixin tag
     display: flex
     flex-direction: row
     list-style: none
-    justify-content: center
+    justify-content: flex-start
     font-size: 1.2rem
     font-weight: 500
     line-height: 1.6rem
@@ -41,10 +42,15 @@ html
     font-family: "DM Sans", sans-serif
     font-size: 62.5%
     scroll-behavior: smooth
+    
+
+main
+    display: flex
+    flex-direction: column
+    margin: 0 4.64% 0 4.64%
 
 .banner
     position: sticky
-    float: left
     width: 67%
     height: 15rem
     &_logo
@@ -73,14 +79,206 @@ html
         opacity: 1
         &.hide
             opacity: 0
-    &_nav
+h2
+    font-weight: 400
+
+.contact
+    border-radius: .5rem
+    background-color: $secondary_light_bg
+    width: 100%
+    font-weight: 400
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    padding: 5rem
+    margin-bottom: 1rem
+    &_info
+        flex: 0 0 auto
+        &_name
+            color: $primary_font
+            font-size: 6.4rem
+            line-height: 8.3rem
+        &_country
+            color: $primary_bg
+            font-size: 2.4rem
+            line-height: 3.1rem
+        &_quote
+            font-size: 1.8rem
+            color: $secondary_light_font
+            line-height: 2.3rem
+        &_list
+            @include tag
+    &_blank_space
+        width: 50%
+        flex: 5 5 50%
+    &_button
+        position: relative
+        top: 0
+        left: 0
+        align-self: flex-start
+        font-size: 2rem
+        font-weight: 700
+        line-height: 2.6rem
+        background-color: $primary_bg
+        color: white
+        border-radius: .5rem
+        height: 6.9rem
+        width: 17rem
+        margin: 2.5rem  5% 0 5%
+        flex: 2 0 17rem
+    &_img
+        width: 20rem
+        height: 20rem
+        object-fit: cover
+        border-radius: 50%
+        image-rendering: auto
+        background: #C4C4C4;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+        align-self: flex-end
+        flex: 0 0 20rem
+
+.order
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: baseline
+    font-size: 1.8rem
+    font-weight: 500
+    line-height: 2.3rem
+    &_label
+        line-height: 2.3rem
+        margin-right: 1rem
+        margin-top: 2rem
+    &_button
+        background-color: $primary_bg
+        color: white
+        padding: 1.5rem
+        margin: 0rem
+        font-size: 1.8rem
+        font-weight: 500
+        line-height: 2.3rem
+        font-family: "DM Sans", sans-serif
+        width: auto
+        border-radius: .5rem
+        border-style: none
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+        /** &_option
+            border-bottom: 1px solid white 
+            margin: 1rem
+            padding: 1rem
+            &:last-child
+                border-bottom: none
+            &_arrow
+                margin-left: 1rem
+            &.hide
+                display: none **/
+    &_list
+        display: none
+        position: absolute
+        left: 14.1rem
+        top: 5rem
+        background-color: $primary_bg
+        color: white
+        padding: 0rem
+        font-size: 1.8rem
+        width: auto
+        border-radius: .5rem
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+        &_arrow
+            margin-left: 1rem
+        & li
+            border-bottom: 1px solid white 
+            margin: 0.5rem
+            padding: 1rem
+            list-style: none
+            cursor: pointer
+            &:last-child
+                border-bottom: none
+            &:first-child::after
+                content: "\2b9d"
+                margin-left: 1rem
+            &:hover
+                background-color: $secondary_bg
+                color: black
+.gallery
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-content: space-between
+    width: 100%
+    flex-wrap: wrap
+    margin-top: 2rem
+    &_frame
+        flex: 0 0 30%
+        margin-bottom: 2rem
+        &_element
+            width: 35rem
+            height: 30rem
+            object-fit: cover
+            &_description
+                display: flex
+                flex-direction: row
+                color: $primary_bg
+                font-size: 2.4rem
+                line-height: 3.1rem
+                justify-content: space-between
+                & p:last-child
+                    margin-left: 1rem
+                &_blank
+                    flex: 1 1 auto
+
+.lightbox
+    width: 100vw
+    height: 100vh
+    background-color: white
+    position: fixed
+    display: none
+    flex-direction: column
+    justify-content: space-around
+    top: 0
+    left: 0
+    opacity: 1
+    &_blank
+        flex: 5 5 auto
+        &_right
+            flex: 0 0 3rem
+    &_frame
         display: flex
         flex-direction: row
-        justify-content: flex-end
-        &_list
-            position: relative
-            top: -.6rem
-            width: 60%
-            margin: 1rem
-            flex-wrap: wrap
-            @include tag
+        justify-content: space-around
+        &_left
+            display: flex
+            flex-direction: column
+            justify-content: center
+            width: 3rem
+            margin-right: 1rem
+        &_principal
+            display: flex
+            flex-direction: column
+            justify-content: center
+            width: auto
+            height: auto
+            flex: 0 0 auto
+            font-size: 2.4rem
+            color: $secondary_font
+            &_img
+                object-fit: contain
+                max-width: 90vh
+                max-height: 90vh
+        &_right
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            margin-left: 1rem
+            width: 3rem
+    /** &_img
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translateX(-50%) translateY(-50%)
+        max-width: 70%
+        max-height: 80%
+        object-fit: contain
+        opacity: 1 **/
+        

@@ -36,13 +36,16 @@ html {
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
-  width: 17rem;
-  height: 3rem;
-  left: 45%;
+  width: auto;
+  height: auto;
+  padding: 2rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   top: 1rem;
   background: #db8876;
   border-radius: .5rem;
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   font-weight: 700;
   text-decoration: none;
   color: black;
@@ -87,10 +90,11 @@ html {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   font-weight: 500;
-  line-height: 1.6rem;
+  line-height: 2.3rem;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .banner_nav_list li {
@@ -153,7 +157,7 @@ main .frame_photograph {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 2rem;
+  margin: 4rem 2rem 4rem 2rem;
 }
 
 main .frame_photograph_link {
@@ -192,21 +196,21 @@ main .frame_photograph_link_name {
 }
 
 main .frame_photograph_localization {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: #901c1c;
-  line-height: 1.7rem;
+  line-height: 2.2rem;
 }
 
 main .frame_photograph_quote {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: black;
-  line-height: 1.3rem;
+  line-height: 1.8rem;
 }
 
 main .frame_photograph_price {
-  font-size: .9rem;
+  font-size: 1.4rem;
   color: #757575;
-  line-height: 1.2rem;
+  line-height: 1.7rem;
 }
 
 main .frame_photograph_taglist {
@@ -221,10 +225,12 @@ main .frame_photograph_taglist {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   font-weight: 500;
-  line-height: 1.6rem;
+  line-height: 2.3rem;
   text-align: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 main .frame_photograph_taglist li {
