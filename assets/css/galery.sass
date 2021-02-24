@@ -178,6 +178,7 @@ h2
         position: absolute
         left: 14.1rem
         top: 5rem
+        z-index: 100
         background-color: $primary_bg
         color: white
         padding: 0rem
@@ -204,29 +205,39 @@ h2
 .gallery
     display: flex
     flex-direction: row
-    justify-content: space-between
+    justify-content: space-around
     align-content: space-between
     width: 100%
     flex-wrap: wrap
     margin-top: 2rem
+    box-sizing: border-box
     &_frame
-        flex: 0 0 30%
+        flex: 0 0 30rem
         margin-bottom: 2rem
+        width: 30rem
+        overflow: hidden
         &_element
-            width: 35rem
+            width: 30rem
             height: 30rem
             object-fit: cover
             &_description
                 display: flex
+                width: 100%
                 flex-direction: row
                 color: $primary_bg
                 font-size: 2.4rem
                 line-height: 3.1rem
                 justify-content: space-between
+                word-wrap: break-word
+                text-overflow: ellipsis
+                & p:first-child
+                    max-width: 60%
                 & p:last-child
                     margin-left: 1rem
                 &_blank
                     flex: 1 1 auto
+        &:last-child
+            align-self: flex-start
 
 .lightbox
     width: 100vw
@@ -247,6 +258,7 @@ h2
         display: flex
         flex-direction: row
         justify-content: space-around
+        cursor: pointer
         &_left
             display: flex
             flex-direction: column
@@ -262,7 +274,7 @@ h2
             flex: 0 0 auto
             font-size: 2.4rem
             color: $secondary_font
-            &_img
+            &_media
                 object-fit: contain
                 max-width: 90vh
                 max-height: 90vh
