@@ -27,13 +27,12 @@ $color_border: #C4C4C4
         a
             text-decoration: none
             color: $secondary_font
-
             padding: 0.3rem 0.5rem 0.3rem 0.3rem
             border: 0.05rem solid $color_border
             box-sizing: border-box
             border-radius: 1.1rem
             color: $secondary_font
-            &:hover
+            &:hover, &.active
                 color: white
                 background-color: $primary_bg
                 cursor: pointer
@@ -76,6 +75,7 @@ html
         opacity: 1
         &.hide
             opacity: 0
+            display: none
     &_nav
         display: flex
         flex-direction: row

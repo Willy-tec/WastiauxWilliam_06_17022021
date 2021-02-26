@@ -57,6 +57,7 @@ html {
 
 .banner_link.hide {
   opacity: 0;
+  display: none;
 }
 
 .banner_nav {
@@ -112,7 +113,7 @@ html {
   color: #901c1c;
 }
 
-.banner_nav_list li a:hover {
+.banner_nav_list li a:hover, .banner_nav_list li a.active {
   color: white;
   background-color: #901c1c;
   cursor: pointer;
@@ -248,7 +249,7 @@ main .frame_photograph_taglist li a {
   color: #901c1c;
 }
 
-main .frame_photograph_taglist li a:hover {
+main .frame_photograph_taglist li a:hover, main .frame_photograph_taglist li a.active {
   color: white;
   background-color: #901c1c;
   cursor: pointer;

@@ -14,6 +14,7 @@ const photographFrame = function (img, id, nick, localization, quote, price, tag
     photographNode.appendChild(makeNode("p", "frame_photograph_quote", quote));
     photographNode.appendChild(makeNode("p", "frame_photograph_price", price + "€/jour"));
     photographNode.appendChild(makeTaglistNode(taglist, "frame_photograph_taglist"));
+    photographNode.setAttribute("data-id", id)
     return photographNode;
 }
 
@@ -51,6 +52,7 @@ const makeTaglistNode = function (taglist, className) {
         link.href = "#" + elt;
         link.textContent = "#" + elt;
         liNode.appendChild(link);
+        liNode.addEventListener("click", tagListListener)
         taglistNode.appendChild(liNode);
     })
     return taglistNode;
@@ -74,16 +76,6 @@ const fillPageWithPhotograph = function(data){
     userArray.forEach(x => frame.appendChild(x));
     let banner_tag = document.getElementsByClassName("banner_nav")[0];
     banner_tag.appendChild(makeTaglistNode(makeTagList(data), "banner_nav_list"));
-    console.log(userArray)
-}
-
-const fillPageWithPhotographByTag = function(data, tag){
-    clearUserArray();
-    let frame = document.getElementById("frame");
-    data["photographers"].forEach(elt => {
-        if(elt.tags.indexOf(tag)!=-1) userArray.push(photographFrame(elt.portrait, elt.id, elt.name, elt.country, elt.tagline, elt.price, elt.tags))
-    });
-    userArray.forEach(x => frame.appendChild(x));
 }
 
 const clearUserArray = function(){
@@ -106,19 +98,66 @@ request.onload = function () {
     fillPageWithPhotograph(data);
 }
 
-window.addEventListener("popstate", (evt)=>{
-    console.log(window.location.hash.slice(1))
-    if(data != null) fillPageWithPhotographByTag(data, window.location.hash.slice(1) )
-})
 
 window.onscroll = function(){
-    console.log(document.documentElement.scrollTop);
     if(document.documentElement.scrollTop > 10) banner_link.classList.remove("hide");
     else banner_link.classList.add("hide")
 }
 
-banner_link.addEventListener("click",(evt)=>{
-    evt.preventDefault();
-    document.documentElement.scrollTop = 0;
 
-})
+//////////////////////////////////////////////////////////////////////////////////////////
+// tag ////////////////////////////////////
+
+
+const tagListListener = function(e){
+    e.preventDefault();
+    hideNotSelectedArtiste(e.target.hash.slice(1));
+    toggleTagInTaskBar(e.target.hash.slice(1));
+}
+
+const hideNotSelectedArtiste = function(tag){
+    showAllArtist()
+    let artistContent = document.querySelectorAll("#frame article");
+    let filterArray = makeTagArraySelectingArtiste(tag);
+    let id = 0
+    for(let item of artistContent){
+       id = parseInt(item.getAttribute("data-id"),10)
+       if(filterArray.indexOf(id)!=-1) item.style.display = "none"
+    }
+}
+
+const showAllArtist = function(){
+    let artistContent = document.querySelectorAll("#frame article");
+    for(let item of artistContent){
+        item.style.display = "flex";
+    }
+}
+const makeTagArraySelectingArtiste = function(tag){
+    let filterArtiste = []
+    if(data){
+        filterArtiste = data.photographers.map(elt =>{
+            if(elt.tags.indexOf(tag)==-1) return elt.id;
+            else return null
+        })
+    }
+    return filterArtiste;
+}
+const toggleTagInTaskBar = function(tag){
+    let tagList = document.querySelector("ul.banner_nav_list");
+    let tagNode = tagList.getElementsByTagName("a")
+    for(let item of tagNode){
+        if(item.hash == "#"+tag) {
+            nodeSelect = item
+        }
+    };
+    for(let item of tagNode){
+        if(item.classList.contains("active")&& item != nodeSelect) {
+            item.classList.remove("active");
+        }
+    };
+    if(nodeSelect.classList.contains("active")){
+        nodeSelect.classList.remove("active");
+        showAllArtist()
+    }
+    else nodeSelect.classList.add("active")
+}

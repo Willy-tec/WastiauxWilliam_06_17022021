@@ -20,23 +20,17 @@
         </a>
         <a href="" class="banner_link hide" id="banner_link">Passer au contenu</a>
     </header>
-    <main>
+    <main id="main">
         <article class="contact">
-            <div class="contact_info">
-                <h2 class="contact_info_name">Mimi Keel</h2>
-                <p class="contact_info_country">London, UK</p>
-                <p class="contact_info_quote">Voir des fleurs partout</p>
-                <ul class="contact_info_list">
-                    <li><a href="#test" class="contact_info_list_link">#test</a></li>
-                    <!-- Mettre Des Span. S'il te plaît -->
-                    <li><a href="#test" class="contact_info_list_link">#test</a></li>
-                    <li><a href="#test" class="contact_info_list_link">#test</a></li>
-                </ul>
+            <div class="contact_info" id="contact_info">
+                <h1 class="contact_info_name"></h1>
+                <p class="contact_info_country"></p>
+                <p class="contact_info_quote"></p>
             </div>
             <input type="button" value="Contactez-moi" class="contact_button">
             <div class="contact_blank_space"></div>
             <!-- &#x2b9f; <span class="order_list_arrow">&#x2b9d</span>  Cette espace blanc facilite la mise en page flex, et permet d'avoir le bouton contact bien placé. Il sera configuré de sorte a s'étirer, ou rétrécir selon les besoins en responsive -->
-            <img src="../image/ID_Photos/MimiKeel.jpg" alt="Photo de Mimi Keel" class="contact_img">
+            <img src="" alt="vide car non chargé" class="contact_img">
         </article>
         <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
@@ -56,8 +50,8 @@
             <div class="lightbox_blank"></div>
         <div class="lightbox_frame_left"><img class="lightbox_frame_left_arrow" tabindex="5" src="../image/svg/left.svg"></img></div>
         <div class="lightbox_frame_principal">
-            <img src="../image/Mimi/Animals_Rainbow.jpg" alt="Photo de Mimi Keel" class="lightbox_frame_principal_img">
-            <p class="lightbox_frame_principal_title">Are-en-ciel</p>
+           <!--  <img src="../image/Mimi/Animals_Rainbow.jpg" alt="Photo de Mimi Keel" class="lightbox_frame_principal_img"> -->
+            <!-- <p class="lightbox_frame_principal_title">Are-en-ciel</p> -->
         </div>
         <div class="lightbox_frame_right">
             <img class="lightbox_frame_right_cross" src="../image/svg/cross.svg"></img>
@@ -67,6 +61,30 @@
         <div class="lightbox_blank"></div>
         </div>
         <div class="lightbox_blank"></div>
+    </div>
+    <div class="modal_bg">
+        <form action="" method="GET" class="modal_dialog">
+            <div class="modal_dialog_crossButton">X</div>
+            <h2 class="modal_dialog_title"><p>Contactez-moi </p><p class="modal_dialog_title_name">Mimi Keel</p></h2>
+            <label class="modal_dialog_label" for="FirstName">Prénom</label>
+            <input class="modal_dialog_input" type="text" name="FirstName" id="FirstName">
+            <label class="modal_dialog_label" for="LastName">Nom</label>
+            <input class="modal_dialog_input" type="text" name="LastName" id="LastName">
+            <label class="modal_dialog_label" for="Email">Email</label>
+            <input class="modal_dialog_input" type="Email" name="Email" id="Email">
+            <label class="modal_dialog_label" for="Message">Message</label>
+            <input class="modal_dialog_input_message" type="text" name="Message" id="Message">
+            <input class="modal_dialog_submit" type="submit" value="Envoyez !">
+        </form>
+
+    </div>
+    <div class="heartPrice">
+        <div class="heartPrice_heart">
+321321♥
+        </div>
+        <div class="heartPrice_price">
+321€/jour
+        </div>
     </div>
 </body>
 
