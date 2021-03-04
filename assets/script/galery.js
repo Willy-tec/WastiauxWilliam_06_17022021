@@ -144,6 +144,7 @@ const updateLike = function (id, value, target) { // mise a jour du compteur de 
             elt.likes += value;
             newLikeValue = elt.likes;
         }
+       
     })
     target.parentNode.querySelector("p").textContent = newLikeValue;
 }
@@ -472,5 +473,15 @@ const lightBoxNodeBis = function (elt) {
 
 }
 
+const sendLog = function(e){
+    e.preventDefault()
+    let modal = document.getElementsByClassName("modal_dialog")[0]
+    let first = modal.querySelector("#FirstName").textContent
+    let last = modal.querySelector("#LastName").textContent
+    let mail = modal.querySelector("#Email").textContent
 
-// Construction du menu info perso
+    let message = modal.querySelector("#Message").textContent
+
+    console.log("first: "+ first+"\nlast: "+last+"\nMail: "+mail+"\nMessage: "+message)
+    return false
+}

@@ -139,3 +139,40 @@ main
                 line-height: 1.7rem
             &_taglist
                 @include tag
+
+@media ( max-width: 800px )
+
+    body
+        padding: 0 2rem 0 2rem
+    .banner
+        position: absolute
+        width: auto
+        &_logo
+            width: 15rem
+            left: 0
+            top: 3rem
+        &_nav
+            position: relative
+            &_list
+                top: 1rem
+                width: 100%
+                margin: 3rem
+    main
+        header
+            h1
+                text-align: right
+                margin: 0 0 0 0
+                font-size: 1.9rem
+        .frame
+            position: relative
+            top: 1rem
+            margin: 6rem 0 0 0
+            &_photograph
+                margin: 4rem 2rem 1rem 2rem
+                &_link
+                    &_img
+                        width: 60vmin
+                        height: 60vmin
+                    &_name
+                        text-align: center
+                        margin-top: 1rem

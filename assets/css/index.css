@@ -254,4 +254,48 @@ main .frame_photograph_taglist li a:hover, main .frame_photograph_taglist li a.a
   background-color: #901c1c;
   cursor: pointer;
 }
+
+@media (max-width: 800px) {
+  body {
+    padding: 0 2rem 0 2rem;
+  }
+  .banner {
+    position: absolute;
+    width: auto;
+  }
+  .banner_logo {
+    width: 15rem;
+    left: 0;
+    top: 3rem;
+  }
+  .banner_nav {
+    position: relative;
+  }
+  .banner_nav_list {
+    top: 1rem;
+    width: 100%;
+    margin: 3rem;
+  }
+  main header h1 {
+    text-align: right;
+    margin: 0 0 0 0;
+    font-size: 1.9rem;
+  }
+  main .frame {
+    position: relative;
+    top: 1rem;
+    margin: 6rem 0 0 0;
+  }
+  main .frame_photograph {
+    margin: 4rem 2rem 1rem 2rem;
+  }
+  main .frame_photograph_link_img {
+    width: 60vmin;
+    height: 60vmin;
+  }
+  main .frame_photograph_link_name {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
 /*# sourceMappingURL=index.css.map */
