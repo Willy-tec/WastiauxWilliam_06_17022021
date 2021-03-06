@@ -359,6 +359,8 @@ const openLightBox = function () {
     document.addEventListener("keyup", keyListener);
     rightButton.addEventListener("click", clickRightLightBox);
     crossButton.addEventListener("click", closeEventListener)
+
+    document.querySelector("html").style.overflowY = "hidden";  // cacher la barre de défilement quand on ouvre la lightbox
 }
 const closeEventListener = function () {
     let lightBox = document.getElementById("lightbox");
@@ -370,7 +372,11 @@ const closeEventListener = function () {
     crossButton.removeEventListener("click", this);
     rightButton.removeEventListener("click", clickRightLightBox);
     leftButton.removeEventListener("click", clickLeftLightBox);
-    document.removeEventListener("keyup", keyListener)
+
+
+    document.removeEventListener("keyup", keyListener);
+
+    document.querySelector("html").style.overflowY = "auto";
 }
 
 const setImgLightBox = function () {

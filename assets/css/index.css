@@ -255,7 +255,7 @@ main .frame_photograph_taglist li a:hover, main .frame_photograph_taglist li a.a
   cursor: pointer;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
   body {
     padding: 0 2rem 0 2rem;
   }
