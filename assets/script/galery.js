@@ -21,6 +21,7 @@ fetch(requestURL).then(function (reponse) {
         data.isDefine = true;
         data.array = jsonData;
         init();
+        console.clear();
     })
     .catch(function (error) {
         console.log("There is an error in loading JSON file: " + error)
@@ -249,8 +250,6 @@ const orderByPopularity = function (tab) {
     });
     data.orderPositionArray = []
     myArray2.forEach(e => {
-        console.log("indexOf: "+e+" : "+myArray.indexOf(e))
-        console.log(data.orderPositionArray.indexOf(myArray.indexOf(e)))
         if(data.orderPositionArray.indexOf(myArray.indexOf(e))== -1) data.orderPositionArray.push(myArray.indexOf(e));
        else {
            let x = myArray.indexOf(e)+1;
@@ -259,7 +258,6 @@ const orderByPopularity = function (tab) {
        }
 
     })
-console.log(data.orderPositionArray)
     setOrder()
 }
 const findIndex = function(b){
@@ -480,14 +478,41 @@ const lightBoxNodeBis = function (elt) {
 }
 
 const sendLog = function(e){
-    e.preventDefault()
     let modal = document.getElementsByClassName("modal_dialog")[0]
-    let first = modal.querySelector("#FirstName").textContent
-    let last = modal.querySelector("#LastName").textContent
-    let mail = modal.querySelector("#Email").textContent
+    let first = modal.querySelector("#FirstName")
+    let last = modal.querySelector("#LastName")
+    let mail = modal.querySelector("#Email")
 
-    let message = modal.querySelector("#Message").textContent
+    let message = modal.querySelector("#Message")
 
-    console.log("first: "+ first+"\nlast: "+last+"\nMail: "+mail+"\nMessage: "+message)
-    return false
+    if(isValidCheck(first, last, mail, message) ){
+        afficheMessage(first.value, last.value, mail.value, message.value);
+        first.value = "";
+        last.value = "";
+        mail.value = "";
+        message.value = "";
+        closeModalButtonListener();
+    }
+    else console.log("Veuillez vérifier les info saisie")
+    return true
+}
+
+const afficheMessage = function(first, last, mail, message){
+    console.log("Prénom: "+ first+"\nNom: "+last+"\nMail: "+mail+"\nMessage: "+message)
+}
+
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-])+$/
+const nameRegex = /[0-9]|\s/
+
+const isValidCheck= function(first, last, mail, message){
+    let isValidFirst = first.value.length >= 2 && !nameRegex.test(first.value) ? true : erreurMsg("Prénom"),
+    isValidLast = last.value.length >= 2  && !nameRegex.test(last.value) ? true : erreurMsg("Nom"),
+    isValidMail = mail.value.length >= 2 && emailRegex.test(mail.value)? true : erreurMsg("Mail"),
+    isValidMessage = message.value.length >= 5 ? true : erreurMsg("Message")
+    return isValidFirst&&isValidLast&&isValidMail&&isValidMessage
+}
+
+const erreurMsg = function(champ){
+    console.log("Le champ "+champ+" est invalide" );
+    return false;
 }
