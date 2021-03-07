@@ -46,13 +46,16 @@ main {
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
-  width: 17rem;
-  height: 3rem;
-  left: 45%;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   top: 1rem;
   background: #db8876;
   border-radius: .5rem;
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   font-weight: 700;
   text-decoration: none;
   color: black;
@@ -64,6 +67,7 @@ main {
 
 .banner_link.hide {
   opacity: 0;
+  display: none;
 }
 
 h2 {
@@ -182,6 +186,10 @@ h2 {
   -webkit-box-flex: 2;
       -ms-flex: 2 0 17rem;
           flex: 2 0 17rem;
+}
+
+.contact_button:focus {
+  outline: .2rem solid black;
 }
 
 .contact_button:hover {
@@ -325,9 +333,21 @@ h2 {
   overflow: hidden;
 }
 
-.gallery_frame_element {
+.gallery_frame a {
+  z-index: 5;
+  display: block;
   width: 40rem;
   height: 40rem;
+}
+
+.gallery_frame a:focus {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.gallery_frame_element {
+  width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: .5rem;

@@ -30,6 +30,7 @@ const makeLinkNode = function (id, img, nick) {
     let linkNode = document.createElement("a");
     linkNode.className = "frame_photograph_link"
     linkNode.href ="assets/html/galery.html?artisteId=" + id;
+    linkNode.setAttribute("aria-label", "Photo représentant "+ nick)
 
     let imgNode = document.createElement("img");
     imgNode.src = "assets/image/image_vignette/ID_Photos/" + img;
@@ -51,6 +52,7 @@ const makeTaglistNode = function (taglist, className) {
         let link = document.createElement("a");
         link.href = "#" + elt;
         link.textContent = "#" + elt;
+        link.setAttribute("aria-label", elt)
         liNode.appendChild(link);
         liNode.addEventListener("click", tagListListener)
         taglistNode.appendChild(liNode);

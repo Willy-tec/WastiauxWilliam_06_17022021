@@ -22,14 +22,14 @@ fetch(requestURL).then(function (reponse) {
     data.isDefine = true;
     data.array = jsonData;
     init();
-    console.clear();
+  //  console.clear();
 })
 .catch(function (error) {
+    
     console.log("There is an error in loading JSON file: " + error)
 })
 
 // fonction d'initialisation => execute toutes les fonctions qui dépendent du JSON pour remplir le site
-
 function init () {
 
     findArtiste();
@@ -42,16 +42,18 @@ function init () {
     setLikeBox();
 
 }
-// Fonction pour trouver le bon artiste dans la liste JSON
 
+// Fonction pour trouver le bon artiste dans la liste JSON
 function findArtiste() {
     data.artiste = data.array.photographers.filter(elt =>elt.id == artisteId)[0]
+    if(data.artiste== undefined) throw "artist non-existent or possible mistake in adress bar"
 }
 
 // fonction pour définir notre tableau de media correspondant a notre artiste
-
 function setDataGalleryArray(){
     data.galleryArray = data.array.media.filter(elt => elt.photographerId == artisteId); // Remplir la gallerie avec les éléments dont l'id correspond a notre artiste.
+//  if(data.galleryArray.length==0) throw "artist got no media"
+// On pourrait mettre une erreur si l'artiste ne mossède aucun media a afficher, cependant l'erreur est non bloquante, et ne casse rien sur le site.
 }
 
 function getFolderName () {
@@ -75,9 +77,20 @@ orderButton.addEventListener("click", (evt) => {
     document.addEventListener("click", closeOrderList);
 })
 
-orderList.addEventListener("click", (evt) => {
+// Ajout des listener sur les liste de selection du tri
+orderList.querySelectorAll("li").forEach(elt =>{
+    elt.addEventListener("click", selectOrderListener);
+    elt.addEventListener("keyup", selectOrderByKey)
+} );
+
+function selectOrderByKey(e){
+    if(e.key=="Enter") selectOrderListener(e)
+}
+
+function selectOrderListener(evt){
     let orderArray = ["Popularité", "Date", "Titre"];
     let orderButtonText = document.getElementById("order_button_text");
+    console.log(evt)
     if (evt.target.nodeName == "LI") {
         orderList.style.display = "none";
         orderButtonText.innerText = evt.target.innerText;
@@ -85,7 +98,7 @@ orderList.addEventListener("click", (evt) => {
         if (data.isDefine) OrderBy(data.order, data.galleryArray);
     }
     document.removeEventListener("click", closeOrderList)
-})
+}
 
 function closeOrderList(e) {
     orderList.style.display = "none";
@@ -132,6 +145,7 @@ function orderByPopularity(tab) {
        }
     })
     setOrder()
+    setTabIndexForGallery()
 }
 
 function findIndex(b){
@@ -144,6 +158,7 @@ function orderByName(tab) {
     myArray.sort()
     data.orderPositionArray = myArray2.map(e => myArray.indexOf(e))
     setOrder()
+    setTabIndexForGallery()
 }
 
 function orderByDate(tab) {
@@ -158,6 +173,7 @@ function orderByDate(tab) {
        else data.orderPositionArray.push(myArray.indexOf(e)+1);
     })
     setOrder()
+    setTabIndexForGallery()
 }
 
 //Une fois que l'on a trouver l'ordre dans lequel on classe les media, on défini l'attribue order avec la bonne valeur.
@@ -166,9 +182,28 @@ function setOrder() {
     let i = 0;
     galNode.forEach(elt => {
         elt.style.order = data.orderPositionArray[i]
-        elt.setAttribute("tabindex", data.orderPositionArray[i] + 10)
         i++;
     })
+}
+
+function setTabIndexForGallery(){
+    let galNode = document.querySelectorAll("div.gallery_frame");
+    let i = 0;
+    galNode.forEach(elt => {
+        elt.querySelector("a").setAttribute("tabindex", data.orderPositionArray[i] + 10)
+        i++;
+    })
+}
+
+// Fonction pour désactiver le tabindex de la gallery
+function removeTabIndexForGallery(){
+    let galNode = document.querySelectorAll("div.gallery_frame");
+    galNode.forEach(elt => {
+        elt.querySelector("a").setAttribute("tabindex", -1)
+    })
+    document.querySelector("#order_button").setAttribute("tabindex", -1);
+    document.querySelector(".contact_button").setAttribute("tabindex", -1);
+    document.querySelector(".banner a").setAttribute("tabindex", -1)
 }
 
 //Fonction pour remplir les informations liée au informations de l'artiste
@@ -228,9 +263,7 @@ function updateLike(id, value, target) { // mise a jour du compteur de like sous
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Heart a refaire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-///////////////////////////////////////////////////////////////////////////
-const heartListener = function (e) {
+function heartListener(e) {
     let id = e.target.parentNode.parentNode.getAttribute("data-id");
     if (e.target.classList.contains("active")) {
         e.target.classList.remove("active");
@@ -239,12 +272,10 @@ const heartListener = function (e) {
     } else {
         e.target.classList.add("active");
         updateLike(id, 1, e.target);
-        updateLikeBox(1)
+        updateLikeBox(1);
     }
 }
-///////////////////////////////////////////////////////////////////////////
-// Heart a refaire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-///////////////////////////////////////////////////////////////////////////
+
 
 
 // fonction pour remplir la page selon les image que l'on possède. Appelle la fabric, et remplis les nodes dans la page.
@@ -310,7 +341,6 @@ function fabricNode(media) {
     else if (media.video) clickableNode.appendChild(makeVidNode(media.video, media.id))
     clickableNode.href = "javascript:void(0)";
     clickableNode.onclick = imgClickListener;
-    clickableNode.style.display = "flex";
     mediaNode.appendChild(clickableNode)
     mediaNode.appendChild(makeDescriptionNode(media))
     return mediaNode;
@@ -318,7 +348,9 @@ function fabricNode(media) {
 
 // Fonction listener pour les vignette d'image, lance la lightbox.
 function imgClickListener(evt) {
-    data.position = data.galleryNodeArray.indexOf(evt.target.parentNode.parentNode)
+    let arr = evt.path.filter(elt => elt.className=="gallery_frame")[0]
+    data.position = data.galleryNodeArray.indexOf(arr)
+    //data.position = data.galleryNodeArray.indexOf(evt.target.parentNode.parentNode)
     openLightBox();
 }
 
@@ -412,6 +444,8 @@ function openLightBox() {
     crossButton.addEventListener("click", closeEventListener)
 
     document.querySelector("html").style.overflowY = "hidden";  // cacher la barre de défilement quand on ouvre la lightbox
+
+    removeTabIndexForGallery();
 }
 
 //Fonction pour séléctionner l'image qu'on affiche: On lui attribue display: block, sinon les autres a "none"
@@ -437,6 +471,7 @@ const closeEventListener = function () {
     leftButton.removeEventListener("click", clickLeftLightBox);
     document.removeEventListener("keyup", keyListener);
     document.querySelector("html").style.overflowY = "auto";
+    resetTabIndex()
 }
 
 const keyListener = function (e) {
@@ -451,12 +486,31 @@ const keyListener = function (e) {
         case "Escape":
             closeEventListener();
             break;
+        case " ": togglePlayMedia();
+            break;
+        case "Backspace": resetMediaPos();
+            break;
         default:
             break;
     }
 
 }
 
+function togglePlayMedia(params) {
+   let video = data.lightBoxNodeArray[data.position].querySelector("video");
+    if(video!=null){
+        if(video.paused) video.play()
+        else video.pause()
+    }
+}
+
+function resetMediaPos(){
+    let video = data.lightBoxNodeArray[data.position].querySelector("video");
+    if(video!=null){
+        video.currentTime = 0;
+    }
+}
+// listener pour le click sur les boutons droit et gauche de la lightbox
 function clickLeftLightBox() {
     let maxVal = data.galleryArray.length - 1;
     let indice = data.orderPositionArray[data.position]
@@ -494,13 +548,51 @@ let contactButton = document.querySelector(".contact_button")
 
 contactButton.addEventListener("click", () => {
     document.querySelector("div.modal_bg").style.display = "block";
+    document.documentElement.style.overflowY = "hidden"
+    document.addEventListener("keyup", closeModalButtonByKeyListener);
     closeModalButton.addEventListener("click", closeModalButtonListener);
+    setTabIndexForModal();
 })
+
+function closeModalButtonByKeyListener(e) {
+    if(e.key == "Escape"){
+        closeModalButtonListener()
+    }
+}
 
 function closeModalButtonListener() {
     let modalNode = document.querySelector("div.modal_bg")
     modalNode.style.display = "none";
+    document.documentElement.style.overflowY = "auto";
+    resetTabIndex()
     closeModalButton.removeEventListener("click", closeModalButtonListener)
+}
+
+function setTabIndexForModal(){
+    let index = 4
+    document.activeElement.tabIndex = 4
+    let modal = document.querySelector("form.modal_dialog").querySelectorAll("input, textarea");
+    modal.forEach(elt => elt.setAttribute("tabindex", index++))
+    removeTabIndexForGallery();
+    modal[0].focus();
+
+}
+
+/* function setTabIndexForLightBox(){
+    document.activeElement.tabIndex = 1
+    document.querySelector(".lightbox_frame_left_arrow").setAttribute("tabindex", 1);
+    document.querySelector(".lightbox_frame_right_arrow").setAttribute("tabindex", 2);
+    document.querySelector(".lightbox_frame_right_cross").setAttribute("tabindex", 3);
+    removeTabIndexForGallery();
+
+} */
+
+
+function resetTabIndex(){
+    setTabIndexForGallery();
+    document.querySelector(".banner a").setAttribute("tabindex", 1)
+    document.querySelector(".contact_button").setAttribute("tabindex", 2);
+    document.querySelector("#order_button").setAttribute("tabindex", 3);
 }
 /////////////////////////////////////////////////////////////////
 
@@ -542,4 +634,11 @@ function isValidCheck(first, last, mail, message){
 function erreurMsg(champ){
     console.log("Le champ "+champ+" est invalide" );
     return false;
+}
+
+// Listener sur le défilement, afin de montrer/masquer le liens vers le contenu "main"
+
+window.onscroll = function(){
+    if(document.documentElement.scrollTop > document.querySelector("#main").offsetTop) banner_link.classList.remove("hide");
+    else banner_link.classList.add("hide")
 }
