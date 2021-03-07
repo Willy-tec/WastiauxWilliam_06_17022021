@@ -245,16 +245,6 @@ h2 {
   border-style: none;
   -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  /** &_option
-            border-bottom: 1px solid white
-            margin: 1rem
-            padding: 1rem
-            &:last-child
-                border-bottom: none
-            &_arrow
-                margin-left: 1rem
-            &.hide
-                display: none **/
 }
 
 .order_button:hover {

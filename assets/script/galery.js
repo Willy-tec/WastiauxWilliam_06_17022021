@@ -2,6 +2,8 @@ let data = {
     isDefine: false,
     array: null,
     galleryArray: [],
+    galleryNodeArray: [],
+    lightBoxNodeArray: [],
     position: 0,
     orderPositionArray: [],
     artiste: {},
@@ -12,7 +14,7 @@ let data = {
 
 };
 let requestURL = "../script/FishEyeDataFR.json";
-let artisteId = window.location.hash.slice(1) //document.getElementsByTagName("body")[0].getAttribute("data-id");
+let artisteId = window.location.search.split("=")[1]
 
 fetch(requestURL).then(function (reponse) {
         return reponse.json()
@@ -21,7 +23,7 @@ fetch(requestURL).then(function (reponse) {
         data.isDefine = true;
         data.array = jsonData;
         init();
-        console.clear();
+      //  console.clear();
     })
     .catch(function (error) {
         console.log("There is an error in loading JSON file: " + error)
@@ -31,21 +33,24 @@ fetch(requestURL).then(function (reponse) {
 // Création du menu déroulant "Order By" ########################################
 
 let orderBox = document.getElementsByClassName("order_select")[0];
-const findArtiste = function () {
+/* const findArtiste = function () {
     data.array.photographers.forEach(elt => {
         if (elt.id == artisteId) data.artiste = elt;
     })
+    console.log(data.chrono-Date.now())
+} */
+
+
+function findArtiste() {
+    data.artiste = data.array.photographers.filter(elt =>elt.id == artisteId)[0]
 }
-
-
-const init = function () {
+function init () {
 
     findArtiste();
     getFolderName();
     updatePriceBox();
     makeInfoBox()
     fillGallery(data.array.media);
-
     OrderBy(data.order, data.galleryArray);
     setLikeBox();
 
@@ -75,12 +80,6 @@ const makeTaglistNode = function (taglist) {
     return taglistNode;
 }
 
-const makeListBoxNode = function () {
-    let node = document.createElement("div");
-    node.setAttribute("role", "listbox");
-    node.setAttribute("aria-activedescendant", "listbox");
-    node.setAttribute("aria-labelledby", "listbox");
-}
 
 let orderButton = document.getElementById("order_button");
 let orderList = document.getElementById("order_list");
@@ -132,22 +131,16 @@ const heartListener = function (e) {
     }
 }
 
-const setLikeBox = function () {
+const setLikeBox = function () {  // ******************
     data.totalLike = data.array.media.filter(elt => elt.photographerId == artisteId).map(elt => elt.likes).reduce((a, b) => a + b)
     // Cette commande peut paraître un peu compliqué, mais on filtre d'abord les éléments par l'identifiant artiste, ensuite on map un nouveau tableau avec uniquement les valeurs de likes, qu'on additionne ensuite.
     document.querySelector(".heartPrice_heart").textContent = data.totalLike + " ♥";
 }
 
-const updateLike = function (id, value, target) { // mise a jour du compteur de like sous les images.
-    let newLikeValue = 0
-    data.array.media.forEach(elt => {
-        if (elt.id == id) {
-            elt.likes += value;
-            newLikeValue = elt.likes;
-        }
-       
-    })
-    target.parentNode.querySelector("p").textContent = newLikeValue;
+function updateLike(id, value, target) { // mise a jour du compteur de like sous les images.
+    let element = data.array.media.filter(elt => elt.id == id)[0]
+    element.likes += value;
+    target.parentNode.querySelector("p").textContent = element.likes;
 }
 
 const updateLikeBox = function (value) { // mise a jour du compteur de like en bas de page.
@@ -155,11 +148,11 @@ const updateLikeBox = function (value) { // mise a jour du compteur de like en b
     document.querySelector(".heartPrice_heart").textContent = data.totalLike + " ♥";
 }
 
-const updatePriceBox = function () {
+function updatePriceBox() {
     document.querySelector(".heartPrice_price").textContent = data.artiste.price + "€ / jour";
 }
 
-const fillGallery = function (dataToFill) {
+function fillGallery(dataToFill) {
     let galleryNode = document.getElementsByClassName("gallery")[0];
     let lightBoxNode = document.querySelector(".lightbox_frame_principal");
 
@@ -170,9 +163,15 @@ const fillGallery = function (dataToFill) {
     data.galleryArray = dataToFill.filter(elt => elt.photographerId == artisteId); // Remplir la gallerie avec les éléments dont l'id correspond a notre artiste.
 
     data.galleryArray.forEach(elt => {
-        galleryNode.appendChild(fabricNode(elt));
-        lightBoxNode.appendChild(lightBoxNodeBis(elt))
+        let nodeTmp = fabricNode(elt)
+        galleryNode.appendChild(nodeTmp);
+        data.galleryNodeArray.push(nodeTmp);
+
+        nodeTmp = lightBoxNodeBis(elt)
+        lightBoxNode.appendChild(nodeTmp)
+        data.lightBoxNodeArray.push(nodeTmp)
     })
+    console.log(data.galleryNodeArray)
 }
 
 const makeImgNode = function (path, id) {
@@ -189,15 +188,11 @@ const getFolderName = function () {
     data.folderName = str;
 }
 
-const findPosition = function (evt) {
-    let array = data.galleryArray;
-    let indArray = array.map(elt => elt.id)
-    data.position = indArray.indexOf(parseInt(evt.getAttribute("data-id"), 10));
 
-}
 
-const imgClickListener = function (evt) {
-    findPosition(evt.target);
+function imgClickListener(evt) {
+    data.position = data.galleryNodeArray.indexOf(evt.target.parentNode.parentNode)
+    console.log(evt.target.getAttribute("data-id"))
     openLightBox();
 }
 
@@ -221,7 +216,9 @@ const fabricNode = function (media) {
     else if (media.video) clickableNode.appendChild(makeVidNode(media.video, media.id))
     clickableNode.href = "javascript:void(0)";
     clickableNode.onclick = imgClickListener;
-    mediaNode.appendChild(clickableNode)
+    clickableNode.style.display = "flex";
+    mediaNode.appendChild(clickableNode);
+
     mediaNode.appendChild(makeDescriptionNode(media))
     return mediaNode;
 }

@@ -29,7 +29,7 @@ const makeLinkNode = function (id, img, nick) {
 
     let linkNode = document.createElement("a");
     linkNode.className = "frame_photograph_link"
-    linkNode.href ="assets/html/galery.html#" + id;
+    linkNode.href ="assets/html/galery.html?artisteId=" + id;
 
     let imgNode = document.createElement("img");
     imgNode.src = "assets/image/image_vignette/ID_Photos/" + img;
