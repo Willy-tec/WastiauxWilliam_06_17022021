@@ -371,11 +371,14 @@ function makeImgNode(path, id) {
 function makeVidNode(path, id) {
     let vidNode = document.createElement("video");
     let srcNode = document.createElement("source");
+    let poster = document.createElement("poster")
+    vidNode.textContent= "Votre navigateur ne prend pas en charge la vidéo"
     srcNode.src = "../image/image_vignette/" + data.folderName + "/" + path;
     srcNode.setAttribute("type", "video/mp4");
     vidNode.style.width = "100%";
     vidNode.setAttribute("data-id", id);
     vidNode.appendChild(srcNode);
+    vidNode.appendChild(poster)
     vidNode.className = "gallery_frame_element";
     return vidNode;
 }
