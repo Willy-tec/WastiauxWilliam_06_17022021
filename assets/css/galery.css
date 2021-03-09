@@ -759,6 +759,12 @@ h2 {
             flex: 0 0 auto;
     width: 100%;
   }
+  .gallery_frame a {
+    z-index: 5;
+    display: block;
+    width: auto;
+    height: auto;
+  }
   .gallery_frame_element {
     min-width: 100%;
     min-height: 50vmin;
