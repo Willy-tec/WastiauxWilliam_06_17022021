@@ -25,7 +25,6 @@ fetch(requestURL).then(function (reponse) {
   //  console.clear();
 })
 .catch(function (error) {
-    
     console.log("There is an error in loading JSON file: " + error)
 })
 
@@ -189,8 +188,11 @@ function setOrder() {
 function setTabIndexForGallery(){
     let galNode = document.querySelectorAll("div.gallery_frame");
     let i = 0;
+    let index = 0;
     galNode.forEach(elt => {
-        elt.querySelector("a").setAttribute("tabindex", data.orderPositionArray[i] + 10)
+        index = 10+( data.orderPositionArray[i]*2)
+        elt.querySelector("a").setAttribute("tabindex", index)
+        elt.querySelector("button").setAttribute("tabindex", index+1)
         i++;
     })
 }
@@ -199,7 +201,8 @@ function setTabIndexForGallery(){
 function removeTabIndexForGallery(){
     let galNode = document.querySelectorAll("div.gallery_frame");
     galNode.forEach(elt => {
-        elt.querySelector("a").setAttribute("tabindex", -1)
+        elt.querySelector("a").setAttribute("tabindex", -1);
+        elt.querySelector("button").setAttribute("tabindex", -1)
     })
     document.querySelector("#order_button").setAttribute("tabindex", -1);
     document.querySelector(".contact_button").setAttribute("tabindex", -1);
@@ -387,10 +390,10 @@ function makeDescriptionNode(media) {
     let likeNode = document.createElement("div");
     let textLikeNode = document.createElement("p");
     textLikeNode.textContent = media.likes;
-    let heartNode = document.createElement("span");
+    let heartNode = document.createElement("button");
     heartNode.className = "gallery_frame_element_description_heart"
     heartNode.textContent = "♥"
-    heartNode.addEventListener("click", heartListener);
+    heartNode.onclick = heartListener
     likeNode.appendChild(textLikeNode);
     likeNode.appendChild(heartNode);
     let blankNode = document.createElement("p");

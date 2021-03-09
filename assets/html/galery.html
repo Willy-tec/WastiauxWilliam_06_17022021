@@ -32,9 +32,10 @@
             <!-- &#x2b9f; <span class="order_list_arrow">&#x2b9d</span>  Cette espace blanc facilite la mise en page flex, et permet d'avoir le bouton contact bien placé. Il sera configuré de sorte a s'étirer, ou rétrécir selon les besoins en responsive -->
             <img src="" alt="vide car non chargé" class="contact_img">
         </article>
-        <div class="order"  >
+        <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
-            <button tabindex="3" class="order_button" id="order_button"><span id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
+            <button tabindex="3" class="order_button" id="order_button"><span
+                    id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
             <ul class="order_list" id="order_list">
                 <li tabindex="5">Popularité</li>
                 <li tabindex="6">Date</li>
@@ -42,30 +43,43 @@
             </ul>
 
         </div>
-    <div class="gallery"></div>
+        <div class="gallery"></div>
     </main>
     <div class="lightbox" id="lightbox" role="dialog">
         <div class="lightbox_blank"></div>
         <div class="lightbox_frame">
             <div class="lightbox_blank"></div>
-        <div class="lightbox_frame_left"><img class="lightbox_frame_left_arrow" tabindex="5" src="../image/full-size/svg/left.svg"></img></div>
-        <div class="lightbox_frame_principal">
-           <!--  <img src="../image/Mimi/Animals_Rainbow.jpg" alt="Photo de Mimi Keel" class="lightbox_frame_principal_img"> -->
-            <!-- <p class="lightbox_frame_principal_title">Are-en-ciel</p> -->
-        </div>
-        <div class="lightbox_frame_right">
-            <img class="lightbox_frame_right_cross" src="../image/full-size/svg/cross.svg"></img>
-            <img class="lightbox_frame_right_arrow" src="../image/full-size/svg/right.svg" tabindex="6"></img>
-            <div class="lightbox_blank_right"></div>
-        </div>
-        <div class="lightbox_blank"></div>
+            <div class="lightbox_frame_left">
+                <button onclick="javascript:clickLeftLightBox()"  tabindex="30">
+                    <img class="lightbox_frame_left_arrow"  src="../image/full-size/svg/left.svg"></img>
+                </button>
+            </div>
+            <div class="lightbox_frame_principal">
+                <!--  <img src="../image/Mimi/Animals_Rainbow.jpg" alt="Photo de Mimi Keel" class="lightbox_frame_principal_img"> -->
+                <!-- <p class="lightbox_frame_principal_title">Are-en-ciel</p> -->
+            </div>
+            <div class="lightbox_frame_right">
+                <button onclick="javascript:closeEventListener()"  tabindex="32">
+                    <img class="lightbox_frame_right_cross" src="../image/full-size/svg/cross.svg"></img>
+                </button>
+                
+                <button onclick="javascript:clickRightLightBox()"  tabindex="31">
+                    <img class="lightbox_frame_right_arrow" src="../image/full-size/svg/right.svg"></img>
+                </button>
+                
+                <div class="lightbox_blank_right"></div>
+            </div>
+            <div class="lightbox_blank"></div>
         </div>
         <div class="lightbox_blank"></div>
     </div>
     <div class="modal_bg">
         <form action="javascript:sendLog()" method="POST" class="modal_dialog">
-            <div class="modal_dialog_crossButton">X</div>
-            <h2 class="modal_dialog_title"><p>Contactez-moi </p><p class="modal_dialog_title_name">Mimi Keel</p></h2>
+            <button class="modal_dialog_crossButton" onclick="closeModalButtonListener()">X</button>
+            <h2 class="modal_dialog_title">
+                <p>Contactez-moi </p>
+                <p class="modal_dialog_title_name">Mimi Keel</p>
+            </h2>
             <label class="modal_dialog_label" for="FirstName">Prénom</label>
             <input class="modal_dialog_input" type="text" name="FirstName" id="FirstName">
             <label class="modal_dialog_label" for="LastName">Nom</label>
@@ -80,10 +94,10 @@
     </div>
     <div class="heartPrice">
         <div class="heartPrice_heart">
-321321♥
+            321321♥
         </div>
         <div class="heartPrice_price">
-321€/jour
+            321€/jour
         </div>
     </div>
 </body>
