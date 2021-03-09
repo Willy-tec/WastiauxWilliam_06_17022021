@@ -1,20 +1,24 @@
 let data = {
     isDefine: false,
     array: null,                // Stocke les donné téléchargé du JSON
-    galleryArray: [],
-    galleryNodeArray: [],
-    lightBoxNodeArray: [],
-    position: 0,
-    orderPositionArray: [],
-    artiste: {},
-    folderName: "",
-    totalLike: 0,
-    order: 0, // 0 => popularité, 1 => date, 2 => Titre. Tri des vignettes.
-    chrono: Date.now()
+    galleryArray: [],           //stocke la structure de la gallerie sous forme d'objet
+    galleryNodeArray: [],       //stocke la structure de la gallerie sous forme de node
+    lightBoxNodeArray: [],      //stocke la structure de la lightbox sous forme d'objet
+    position: 0,                // Position du "curseur" permettant de selectionner l'image a afficher dans la lightbox
+    orderPositionArray: [],     // Stocke les positions de chaque élément de la gallerie, selon l'ordre de tri choisi
+    artiste: {},                // Stocke l'objet representant l'artiste affiché
+    folderName: "",             // stocke le repertoire de l'artiste
+    totalLike: 0,               // Stocke le total de like qu'on affiche en bas a droite de la page
+    order: 0,                   // 0 => popularité, 1 => date, 2 => Titre. Tri des vignettes.
+    chrono: Date.now()          // variable utilisé quand on souhaite chronometré l'execution de la page.
 };
 
-let requestURL = "../script/FishEyeDataFR.json";
+let requestURL = "../script/FishEyeDataFR.json";        // adresse du fichier json
 let artisteId = window.location.search.split("=")[1] // on récupère la valeur transmise en GET
+
+/**
+ * Charge les données du fichiers json, et lance la suite du chargement de la page via init()
+ */
 
 fetch(requestURL).then(function (reponse) {
     return reponse.json()
@@ -28,7 +32,9 @@ fetch(requestURL).then(function (reponse) {
     console.log("There is an error in loading JSON file: " + error)
 })
 
-// fonction d'initialisation => execute toutes les fonctions qui dépendent du JSON pour remplir le site
+/**
+ * fonction d'initialisation => execute toutes les fonctions qui dépendent du JSON pour remplir le site
+ */
 function init () {
 
     findArtiste();
@@ -41,20 +47,26 @@ function init () {
     setLikeBox();
 
 }
-
-// Fonction pour trouver le bon artiste dans la liste JSON
+/**
+ * Fonction pour trouver le bon artiste dans la liste JSON
+ */
 function findArtiste() {
     data.artiste = data.array.photographers.filter(elt =>elt.id == artisteId)[0]
     if(data.artiste== undefined) throw "artist non-existent or possible mistake in adress bar"
 }
 
-// fonction pour définir notre tableau de media correspondant a notre artiste
+/**
+ * fonction pour définir notre tableau de media correspondant a notre artiste
+ */
 function setDataGalleryArray(){
     data.galleryArray = data.array.media.filter(elt => elt.photographerId == artisteId); // Remplir la gallerie avec les éléments dont l'id correspond a notre artiste.
 //  if(data.galleryArray.length==0) throw "artist got no media"
 // On pourrait mettre une erreur si l'artiste ne mossède aucun media a afficher, cependant l'erreur est non bloquante, et ne casse rien sur le site.
 }
 
+/**
+  * Trouve le nom du dossier et défini la variable associé dans l'objet data
+ */
 function getFolderName () {
     let str = data.artiste.name.split(" ")[0];
     data.folderName = str;
