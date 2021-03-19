@@ -86,6 +86,7 @@ orderButton.addEventListener("click", (evt) => {
     orderList.style.top = (rect.y + window.scrollY) + "px";
     orderList.style.left = rect.x + "px";
     document.addEventListener("click", closeOrderList);
+    orderButton.setAttribute("aria-expanded", true);
 })
 
 // Ajout des listener sur les liste de selection du tri
@@ -101,6 +102,7 @@ function selectOrderByKey(e){
 function selectOrderListener(evt){
     let orderArray = ["Popularité", "Date", "Titre"];
     let orderButtonText = document.getElementById("order_button_text");
+    orderButton.setAttribute("aria-expanded", false);
     console.log(evt)
     if (evt.target.nodeName == "LI") {
         orderList.style.display = "none";
@@ -114,6 +116,7 @@ function selectOrderListener(evt){
 function closeOrderList(e) {
     orderList.style.display = "none";
     document.removeEventListener("click", closeOrderList)
+    orderButton.setAttribute("aria-expanded", false);
 }
 
 window.onresize = function (evt) {
@@ -212,9 +215,11 @@ function setTabIndexForGallery(){
 // Fonction pour désactiver le tabindex de la gallery
 function removeTabIndexForGallery(){
     let galNode = document.querySelectorAll("div.gallery_frame");
+    console.log(galNode)
     galNode.forEach(elt => {
         elt.querySelector("a").setAttribute("tabindex", -1);
-        elt.querySelector("button").setAttribute("tabindex", -1)
+        elt.querySelector("button").setAttribute("tabindex", -1);
+        if(elt.querySelector("video"))elt.querySelector("video").setAttribute("tabindex", -1);
     })
     document.querySelector("#order_button").setAttribute("tabindex", -1);
     document.querySelector(".contact_button").setAttribute("tabindex", -1);
@@ -241,9 +246,10 @@ function makeTaglistNode(taglist) {
     taglistNode.className = "contact_info_list";
     taglist.forEach(elt => {
         let liNode = document.createElement("li");
-        let span = document.createElement("span");
-        span.textContent = "#" + elt;
-        liNode.appendChild(span);
+        let link = document.createElement("a");
+        link.textContent = "#" + elt;
+        link.href="../../?tag="+elt
+        liNode.appendChild(link);
         taglistNode.appendChild(liNode);
     })
     return taglistNode;
@@ -363,9 +369,10 @@ function fabricNode(media) {
 
 // Fonction listener pour les vignette d'image, lance la lightbox.
 function imgClickListener(evt) {
-    let arr = evt.path.filter(elt => elt.className=="gallery_frame")[0]
-    data.position = data.galleryNodeArray.indexOf(arr)
-    //data.position = data.galleryNodeArray.indexOf(evt.target.parentNode.parentNode)
+    evt.preventDefault();
+    let balise = evt.target
+    while(balise.className!="gallery_frame") balise = balise.parentNode
+    data.position = data.galleryNodeArray.indexOf(balise)
     openLightBox();
 }
 
@@ -398,7 +405,7 @@ function makeVidNode(path, id) {
 // Fonction qui créé une node description, qui sera utilisé par la fabric.
 function makeDescriptionNode(media) {
     let descriptionNode = document.createElement("div");
-    let titreNode = document.createElement("p");
+    let titreNode = document.createElement("h3");
     titreNode.textContent = findTitle(media.image || media.video).title;
     let prixNode = document.createElement("p");
     prixNode.textContent = media.price + "€";
@@ -456,11 +463,12 @@ function openLightBox() {
     leftButton.focus();     // Petit hack a cause d'un manquement lors de l'affichage de la lightbox.
     leftButton.blur();
 
-    leftButton.addEventListener("click", clickLeftLightBox);
-    document.addEventListener("keyup", keyListener);
+   
+/*  leftButton.addEventListener("click", clickLeftLightBox);
     rightButton.addEventListener("click", clickRightLightBox);
-    crossButton.addEventListener("click", closeEventListener)
+    crossButton.addEventListener("click", closeEventListener) */
 
+    document.addEventListener("keyup", keyListener);
     document.querySelector("html").style.overflowY = "hidden";  // cacher la barre de défilement quand on ouvre la lightbox
 
     removeTabIndexForGallery();
@@ -578,7 +586,7 @@ function closeModalButtonByKeyListener(e) {
     }
 }
 
-function closeModalButtonListener() {
+function closeModalButtonListener(evt) {
     let modalNode = document.querySelector("div.modal_bg")
     modalNode.style.display = "none";
     document.documentElement.style.overflowY = "auto";
@@ -616,6 +624,7 @@ function resetTabIndex(){
 
 // Fonction pour afficher les messages dans la console lorsqu'on click sur contacter
 function sendLog(e){
+    e.preventDefault()
     let modal = document.getElementsByClassName("modal_dialog")[0]
     let first = modal.querySelector("#FirstName")
     let last = modal.querySelector("#LastName")
@@ -660,3 +669,10 @@ window.onscroll = function(){
     if(document.documentElement.scrollTop > document.querySelector("#main").offsetTop) banner_link.classList.remove("hide");
     else banner_link.classList.add("hide")
 }
+
+let form = document.querySelector("form")
+ form.addEventListener("submit", sendLog)
+
+/*   window.addEventListener("keydown", (e)=>{
+        if(e.key=="Tab") console.log(document.activeElement    )
+    })  */

@@ -338,7 +338,6 @@ h2 {
   border: none;
   color: #901c1c;
   font-size: 2.4rem;
-  height: 100%;
   width: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -390,6 +389,13 @@ h2 {
           justify-content: space-between;
   word-wrap: break-word;
   text-overflow: ellipsis;
+  place-items: center;
+}
+
+.gallery_frame_element_description h3 {
+  font-size: 2.4rem;
+  line-height: 3.1rem;
+  width: auto;
 }
 
 .gallery_frame_element_description div {
@@ -403,6 +409,7 @@ h2 {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   margin-left: 1rem;
+  place-items: center;
 }
 
 .gallery_frame_element_description_blank {
@@ -414,6 +421,7 @@ h2 {
 .gallery_frame_element_description_heart {
   margin-left: .5rem;
   margin-right: .5rem;
+  height: 100%;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -444,16 +452,21 @@ h2 {
           flex-direction: column;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  z-index: 5;
+  z-index: 15;
   top: 0;
   left: 0;
   opacity: 1;
+}
+
+.lightbox button {
+  cursor: pointer;
 }
 
 .lightbox_blank {
   -webkit-box-flex: 5;
       -ms-flex: 5 5 auto;
           flex: 5 5 auto;
+  z-index: -1;
 }
 
 .lightbox_blank_right {
@@ -472,7 +485,6 @@ h2 {
           flex-direction: row;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  cursor: pointer;
 }
 
 .lightbox_frame button {
@@ -545,7 +557,7 @@ h2 {
 .modal_bg {
   display: none;
   position: fixed;
-  z-index: 5;
+  z-index: 15;
   top: 0%;
   left: 0%;
   background-color: rgba(196, 196, 196, 0.4);
@@ -775,7 +787,7 @@ h2 {
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .gallery_frame_element_description {
+  .gallery_frame_element_description, .gallery_frame_element_description h3 {
     width: auto;
     font-size: 1.4rem;
     line-height: 1.8rem;
@@ -786,17 +798,20 @@ h2 {
         align-self: unset;
   }
   .lightbox_frame_left, .lightbox_frame_right {
-    width: 1.3rem;
+    width: 5%;
   }
   .lightbox_frame_left {
-    margin-right: .5rem;
+    margin-right: 1.5rem;
   }
   .lightbox_frame_right {
     margin-left: .5rem;
   }
+  .lightbox_frame button > img {
+    width: 100%;
+  }
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 730px), (max-height: 824px) {
   .modal_dialog {
     top: 0;
     left: 0;

@@ -98,6 +98,8 @@ request.send();
 request.onload = function () {
     data = request.response;
     fillPageWithPhotograph(data);
+    verifyAdressForTag();
+
 }
 
 
@@ -113,8 +115,11 @@ window.onscroll = function(){
 
 const tagListListener = function(e){
     e.preventDefault();
+/*     window.document.location.search="tag="+ e.target.hash.slice(1)       Si on veut afficher les tags séléctionner dans la barre d'adresse, on peut utiliser cette méthode, mais ça nécéssite de recharger la page
+*/
+
     hideNotSelectedArtiste(e.target.hash.slice(1));
-    toggleTagInTaskBar(e.target.hash.slice(1));
+    toggleTagInTaskBar(e.target.hash.slice(1)); 
 }
 
 const hideNotSelectedArtiste = function(tag){
@@ -145,6 +150,7 @@ const makeTagArraySelectingArtiste = function(tag){
     return filterArtiste;
 }
 const toggleTagInTaskBar = function(tag){
+
     let tagList = document.querySelector("ul.banner_nav_list");
     let tagNode = tagList.getElementsByTagName("a")
     for(let item of tagNode){
@@ -162,4 +168,13 @@ const toggleTagInTaskBar = function(tag){
         showAllArtist()
     }
     else nodeSelect.classList.add("active")
+}
+
+function verifyAdressForTag(){
+    let tag = window.document.location.search
+    if(!tag) return
+    tag = tag.replace("?", "")
+    tag = tag.split("=")
+    if(tag.length<=2) tag = tag[1]
+    hideNotSelectedArtiste(tag)
 }

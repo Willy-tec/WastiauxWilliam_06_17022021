@@ -34,24 +34,24 @@
         </article>
         <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
-            <button tabindex="3" class="order_button" id="order_button"><span
+            <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="3" class="order_button" id="order_button"><span
                     id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
-            <ul class="order_list" id="order_list">
-                <li tabindex="5">Popularité</li>
-                <li tabindex="6">Date</li>
-                <li tabindex="7">Titre</li>
+            <ul class="order_list" id="order_list" role="listbox"  >
+                <li role="option" tabindex="5" aria-labelledby="Orderby">Popularité</li>
+                <li role="option" tabindex="6" aria-labelledby="Orderby">Date</li>
+                <li role="option" tabindex="7" aria-labelledby="Orderby">Titre</li>
             </ul>
 
         </div>
         <div class="gallery"></div>
     </main>
-    <div class="lightbox" id="lightbox" role="dialog">
+    <div class="lightbox" id="lightbox" role="dialog" aria-label=”image closeup view”>
         <div class="lightbox_blank"></div>
         <div class="lightbox_frame">
             <div class="lightbox_blank"></div>
             <div class="lightbox_frame_left">
                 <button onclick="javascript:clickLeftLightBox()"  tabindex="30">
-                    <img class="lightbox_frame_left_arrow" alt="left arrow" src="../image/full-size/svg/left.svg"></img>
+                    <img class="lightbox_frame_left_arrow" alt="Previous image" src="../image/full-size/svg/left.svg"></img>
                 </button>
             </div>
             <div class="lightbox_frame_principal">
@@ -62,11 +62,9 @@
                 <button onclick="javascript:closeEventListener()"  tabindex="32">
                     <img class="lightbox_frame_right_cross" alt="cross button for closing lightbox" src="../image/full-size/svg/cross.svg"></img>
                 </button>
-                
-                <button onclick="javascript:clickRightLightBox()"  tabindex="31" >
-                    <img class="lightbox_frame_right_arrow" alt="right arrow" src="../image/full-size/svg/right.svg"></img>
+                <button  onclick="javascript:clickRightLightBox()" tabindex="31" >
+                    <img class="lightbox_frame_right_arrow" alt="Next image" src="../image/full-size/svg/right.svg"></img>
                 </button>
-                
                 <div class="lightbox_blank_right"></div>
             </div>
             <div class="lightbox_blank"></div>
@@ -74,8 +72,8 @@
         <div class="lightbox_blank"></div>
     </div>
     <div class="modal_bg">
-        <form action="javascript:sendLog()" method="POST" class="modal_dialog">
-            <button class="modal_dialog_crossButton" onclick="closeModalButtonListener()">X</button>
+        <form  class="modal_dialog">
+            <button type="button" class="modal_dialog_crossButton">X</button>
             <h2 class="modal_dialog_title">
                 <p>Contactez-moi </p>
                 <p class="modal_dialog_title_name">Mimi Keel</p>
