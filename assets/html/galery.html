@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/galery.css">
-    <script src="../script/gallery.js" defer></script>
+
+
     <title>Gallerie de Mimi Keel</title>
     <link rel="shortcut icon" href="../image/full-size/svg/favicon.svg" type="image/x-icon">
 </head>
@@ -34,18 +35,32 @@
         </article>
         <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
-            <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="3" class="order_button" id="order_button"><span
-                    id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
-            <ul class="order_list" id="order_list" role="listbox"  >
-                <li role="option" tabindex="5" aria-labelledby="Orderby">Popularité</li>
-                <li role="option" tabindex="6" aria-labelledby="Orderby">Date</li>
-                <li role="option" tabindex="7" aria-labelledby="Orderby">Titre</li>
-            </ul>
-
+            <div class="order-drop" tabindex="0">
+              <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="3" class="order_button" id="order_button"><span
+                      id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
+              <ul class="order_list" id="order_list" role="listbox"  >
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Popularity">Popularité</a></li>
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Date">Date</a></li>
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Title">Titre</a></li>
+              </ul>
+            </div>
         </div>
+   <!--      <div class="dropdown">
+          <span>Trier par : </span>
+          <div class="dropdown dropdown-hover">
+            <span class="btn btn-dropdown">Popularité</span>
+            <div class="dropdown-inner">
+              <ul class="nav-list">
+                <li><a class="btn" href="#">Popularité</a></li>
+                <li><a class="btn" href="#">Date</a></li>
+                <li><a class="btn" href="#">Titre</a></li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
         <div class="gallery"></div>
     </main>
-    <div class="lightbox" id="lightbox" role="dialog" aria-label=”image closeup view”>
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="image closeup view">
         <div class="lightbox_blank"></div>
         <div class="lightbox_frame">
             <div class="lightbox_blank"></div>
@@ -55,8 +70,6 @@
                 </button>
             </div>
             <div class="lightbox_frame_principal">
-                <!--  <img src="../image/Mimi/Animals_Rainbow.jpg" alt="Photo de Mimi Keel" class="lightbox_frame_principal_img"> -->
-                <!-- <p class="lightbox_frame_principal_title">Are-en-ciel</p> -->
             </div>
             <div class="lightbox_frame_right">
                 <button onclick="javascript:closeEventListener()"  tabindex="32">
@@ -98,6 +111,14 @@
             321€/jour
         </div>
     </div>
+ <script src="../script/fetchAndParse.js" ></script>
+<script src="../script/Artiste.js" ></script>
+<script src="../script/Media.js" ></script>
+<script src="../script/Fabric.js" ></script>
+<!-- <script src="../script/eventListener.js" ></script> -->
+<script src="../script/Order.js" ></script>
+
+<!-- <script src="../script/gallery.js" ></script> -->
 </body>
 
 </html>
