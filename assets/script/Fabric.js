@@ -55,7 +55,7 @@ class Fabric {
   }
 
   renderImgLightbox() {
-    let str = `<div class="lightbox_frame_principal_media" style="display: none;">
+    let str = `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
     <img src="../image/full-size/${this.artiste.folderName}/${this.media.image}" alt="${this.media.altText}">
     <p class="lightbox_frame_principal_title">${this.media.title}</p>
   </div>`;
@@ -63,9 +63,11 @@ class Fabric {
   }
 
   renderVidLightbox() {
-    `<div class="lightbox_frame_principal_media" style="display: none;">
+    let str =
+    `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
       <video src="../image/full-size/${this.artiste.folderName}/${this.media.video}" controls=""></video>
       <p class="lightbox_frame_principal_title">${this.media.title}</p>
     </div>`;
+    return str;
   }
 }

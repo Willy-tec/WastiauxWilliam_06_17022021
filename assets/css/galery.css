@@ -315,7 +315,6 @@ h2 {
 }
 
 .order_list li a:hover, .order_list li a:focus {
-  background-color: #db8876;
   color: black;
   border-radius: .5rem;
 }

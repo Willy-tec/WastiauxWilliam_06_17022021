@@ -20,14 +20,19 @@ fetch(requestURL).then(function (reponse) {
     });
     updatePriceBox(virtualJSON.artiste);
     setLikeBox(virtualJSON.media);
-    //gallery.querySelectorAll("a").forEach(el => el.addEventListener("click", imgClickListener));
+    gallery.querySelectorAll("a").forEach(el => el.addEventListener("click", frameClickListener));
     console.log(virtualJSON);
     //jsonData.media.filter(elt=>elt.photographerId == artisteId).forEach(el => gallery.innerHTML += renderNode(el));
 
-    orderBy("default", virtualJSON);
+    orderBy(getUrlParam().hash, virtualJSON);
     window.addEventListener("popstate", ()=>{
       orderBy(getUrlParam().hash, virtualJSON);
     });
+
+    setLikeListener();
+
+    setTabIndexGallery();
+
   })
   .catch(function (error) {
     console.log("There is an error in loading JSON file: " + error);
