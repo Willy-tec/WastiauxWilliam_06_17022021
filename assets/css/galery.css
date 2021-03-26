@@ -866,4 +866,9 @@ h2 {
     margin: auto;
   }
 }
+
+*:focus {
+  -webkit-filter: sepia(100);
+          filter: sepia(100);
+}
 /*# sourceMappingURL=galery.css.map */

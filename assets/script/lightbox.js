@@ -6,7 +6,7 @@ function frameClickListener(evt){
   document.querySelector(".lightbox").style.display = "flex";
   setImgToPrint(node.style.order);
 
-  window.addEventListener("keyup",keyListener);
+  window.addEventListener("keydown", keyListener);
 
   document.documentElement.style.overflowY = "hidden";
 }
@@ -36,7 +36,7 @@ function clickLeftLightBox (){
 }
 
 function clickRightLightBox(){
-  console.log("quoiii")
+
   let find = findIndex();
   find.index +=1;
   if(find.index>find.max) find.index = 0;
@@ -54,11 +54,31 @@ function findIndex(){
   let index = idArray.indexOf( parseInt(mediaId,10));
   return {index, max};
 }
+
+let index=0;
+
+function setFocus(e){
+  let node;
+  
+  switch(index){
+  case 0 : node = document.querySelector(".lightbox_frame_left_arrow").parentNode; break;
+  case 1 : node = document.querySelector(".lightbox_frame_right_arrow").parentNode; break;
+  case 2 : node = document.querySelector(".lightbox_frame_right_cross").parentNode; break;
+  }
+  console.log(node);
+  node.focus();
+  index++;
+  if(index>2) index = 0;
+}
+
 function keyListener(e){
+  //e.preventDefault();
   switch(e.key){
   case "ArrowLeft": clickLeftLightBox(); break;
-  case " ": case "ArrowRight": clickRightLightBox(); break;
+  case "ArrowRight": clickRightLightBox(); break;
   case "Escape": closeEventListener(); break;
+  case "Tab": setFocus(e); break;
   default : break;
   }
 }
+

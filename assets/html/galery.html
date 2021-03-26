@@ -14,9 +14,9 @@
     <link rel="shortcut icon" href="../image/full-size/svg/favicon.svg" type="image/x-icon">
 </head>
 
-<body data-id="243">
+<body data-id="243" tabindex="0">
     <header role="banner" class="banner">
-        <a href="../../" tabindex="1">
+        <a href="../../" tabindex="0">
             <img src="../image/full-size/svg/logo.svg" alt="Fisheye Home page" class="banner_logo">
         </a>
         <a href="#main" class="banner_link hide" id="banner_link">Passer au contenu</a>
@@ -28,7 +28,7 @@
                 <p class="contact_info_country"></p>
                 <p class="contact_info_quote"></p>
             </div>
-            <input type="button" value="Contactez-moi" class="contact_button" tabindex="2">
+            <input type="button" value="Contactez-moi" class="contact_button" tabindex="0">
             <div class="contact_blank_space"></div>
             <!-- &#x2b9f; <span class="order_list_arrow">&#x2b9d</span>  Cette espace blanc facilite la mise en page flex, et permet d'avoir le bouton contact bien placé. Il sera configuré de sorte a s'étirer, ou rétrécir selon les besoins en responsive -->
             <img src="" alt="vide car non chargé" class="contact_img">
@@ -36,12 +36,12 @@
         <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
             <div class="order-drop" tabindex="0">
-              <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="3" class="order_button" id="order_button"><span
+              <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="0" class="order_button" id="order_button"><span
                       id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
               <ul class="order_list" id="order_list" role="listbox"  >
-                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="10" href="#Popularity">Popularité</a></li>
-                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="11" href="#Date">Date</a></li>
-                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="12" href="#Title">Titre</a></li>
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Popularity">Popularité</a></li>
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Date">Date</a></li>
+                  <li role="option"  aria-labelledby="Orderby"><a class="order_list_option" tabindex="0" href="#Title">Titre</a></li>
               </ul>
             </div>
         </div>
@@ -65,17 +65,17 @@
         <div class="lightbox_frame">
             <div class="lightbox_blank"></div>
             <div class="lightbox_frame_left">
-                <button onclick="javascript:clickLeftLightBox()"  tabindex="30">
+                <button onclick="javascript:clickLeftLightBox()"  tabindex="10">
                     <img class="lightbox_frame_left_arrow" alt="Previous image" src="../image/full-size/svg/left.svg"></img>
                 </button>
             </div>
             <div class="lightbox_frame_principal">
             </div>
             <div class="lightbox_frame_right">
-                <button onclick="javascript:closeEventListener()"  tabindex="32">
+                <button onclick="javascript:closeEventListener()"  tabindex="10">
                     <img class="lightbox_frame_right_cross" alt="cross button for closing lightbox" src="../image/full-size/svg/cross.svg"></img>
                 </button>
-                <button  onclick="javascript:clickRightLightBox()" tabindex="31" >
+                <button  onclick="javascript:clickRightLightBox()" tabindex="10" >
                     <img class="lightbox_frame_right_arrow" alt="Next image" src="../image/full-size/svg/right.svg"></img>
                 </button>
                 <div class="lightbox_blank_right"></div>

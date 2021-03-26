@@ -5,3 +5,6 @@ function setTabIndexGallery(){
   console.log(linkNode.length+" : "+ buttonNode.length);
   console.log(linkNode)
 }
+/* window.addEventListener("keyup", (e)=>{
+  if(e.key=="Tab")console.log(document.activeElement);
+}) */
