@@ -73,19 +73,19 @@
     </div>
     <div class="modal_bg">
         <form  class="modal_dialog">
-            <button type="button" class="modal_dialog_crossButton">X</button>
+            <button type="button" class="modal_dialog_crossButton" onclick="closeModalListener(event)">X</button>
             <h2 class="modal_dialog_title">
                 <p>Contactez-moi </p>
                 <p class="modal_dialog_title_name">Mimi Keel</p>
             </h2>
             <label class="modal_dialog_label" for="FirstName">Prénom</label>
-            <input class="modal_dialog_input" type="text" name="FirstName" id="FirstName">
+            <input class="modal_dialog_input" type="text" name="FirstName" minlength=3 pattern="[a-zA-Z -]+" id="FirstName" required>
             <label class="modal_dialog_label" for="LastName">Nom</label>
-            <input class="modal_dialog_input" type="text" name="LastName" id="LastName">
+            <input class="modal_dialog_input" type="text" name="LastName" minlength=3 pattern="[a-zA-Z -]+" id="LastName" required>
             <label class="modal_dialog_label" for="Email">Email</label>
-            <input class="modal_dialog_input" type="Email" name="Email" id="Email">
+            <input class="modal_dialog_input" type="Email" name="Email" id="Email" required pattern="[a-zA-Z.-]+@[a-zA-Z]+[.][a-zA-Z]+">
             <label class="modal_dialog_label" for="Message">Votre message</label>
-            <textarea class="modal_dialog_input_message" type="text" name="Message" id="Message"></textarea>
+            <textarea class="modal_dialog_input_message" type="text" name="Message" id="Message" minlength=10 required></textarea>
             <input class="modal_dialog_submit" type="submit" value="Envoyer">
         </form>
 
@@ -106,9 +106,9 @@
 <script src="../script/Order.js" ></script>
 <script src="../script/lightbox.js" ></script>
 <script src="../script/like.js" ></script>
-<script src="../script/tabIndex.js" ></script>
+<!-- <script src="../script/tabIndex.js" ></script> -->
 <script src="../script/debugtool.js" ></script>
-
+<script src="../script/contact.js" ></script>
 <!-- <script src="../script/gallery.js" ></script> -->
 </body>
 

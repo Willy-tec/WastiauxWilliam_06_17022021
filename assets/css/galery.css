@@ -580,6 +580,10 @@ h2 {
   width: 3rem;
 }
 
+input:invalid, textarea:invalid {
+  outline: .2rem red solid;
+}
+
 .modal_bg {
   display: none;
   position: fixed;

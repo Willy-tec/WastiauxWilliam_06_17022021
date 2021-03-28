@@ -31,7 +31,6 @@ fetch(requestURL).then(function (reponse) {
 
     setLikeListener();
 
-    setTabIndexGallery();
 
   })
   .catch(function (error) {
