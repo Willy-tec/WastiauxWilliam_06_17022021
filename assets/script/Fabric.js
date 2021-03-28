@@ -63,8 +63,7 @@ class Fabric {
   }
 
   renderVidLightbox() {
-    let str =
-    `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
+    let str = `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
       <video src="../image/full-size/${this.artiste.folderName}/${this.media.video}" controls=""></video>
       <p class="lightbox_frame_principal_title">${this.media.title}</p>
     </div>`;

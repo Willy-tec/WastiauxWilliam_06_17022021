@@ -62,8 +62,10 @@ function fillContact(artiste){
 function makeListTag(artiste, classTitle){
   let ul = document.createElement("ul");
   ul.className = classTitle;
+  let tabInd = 3;
   artiste.tags.forEach(el =>{
-    ul.innerHTML += `<li><a href="../../?tag=${el}">#${el}</a></li>`;
+    ul.innerHTML += `<li><a href="../../?tag=${el}" tabindex="${tabInd}">#${el}</a></li>`;
+    tabInd++;
   });
   return ul;
 }

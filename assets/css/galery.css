@@ -384,8 +384,9 @@ h2 {
 }
 
 .gallery_frame a:focus {
-  border: 2px solid black;
+  border: .2rem dashed black;
   border-radius: 5px;
+  outline: none;
 }
 
 .gallery_frame_element {
@@ -867,8 +868,7 @@ h2 {
   }
 }
 
-*:focus {
-  -webkit-filter: sepia(100);
-          filter: sepia(100);
+*:focus, .focus {
+  outline: .2rem dashed black;
 }
 /*# sourceMappingURL=galery.css.map */

@@ -23,8 +23,9 @@ function setImgToPrint(index){
 
 function closeEventListener(){
   document.querySelector(".lightbox").style.display = "none";
-  window.removeEventListener("keyup", keyListener);
+  window.removeEventListener("keydown", keyListener);
   document.documentElement.style.overflowY = "auto";
+  document.querySelector("a").focus();
 }
 
 function clickLeftLightBox (){
@@ -52,33 +53,52 @@ function findIndex(){
     if(el.style.display == "block") mediaId = el.dataset.id;
   });
   let index = idArray.indexOf( parseInt(mediaId,10));
-  return {index, max};
+  return {index, max, mediaId};
 }
 
-let index=0;
+let index=0, oldNode={};
 
 function setFocus(e){
-  let node;
-  
-  switch(index){
-  case 0 : node = document.querySelector(".lightbox_frame_left_arrow").parentNode; break;
-  case 1 : node = document.querySelector(".lightbox_frame_right_arrow").parentNode; break;
-  case 2 : node = document.querySelector(".lightbox_frame_right_cross").parentNode; break;
-  }
-  console.log(node);
+  let node,
+    array = [],
+    dom = document.querySelector("#lightbox");
+
+  e.preventDefault();
+
+  let find = findIndex();
+  let vidNode = virtualJSON.media.find(el => el.id == find.mediaId);
+
+  array.push(dom.querySelector(".lightbox_frame_left_arrow").parentNode);
+  if(vidNode.video) array.push(dom.querySelector(`[data-id="${find.mediaId}"] video`));
+  array.push(dom.querySelector(".lightbox_frame_right_arrow").parentNode);
+  array.push(dom.querySelector(".lightbox_frame_right_cross").parentNode);
+
+  node= array[index];
   node.focus();
   index++;
-  if(index>2) index = 0;
+  if(index>array.length-1) index = 0;
+  node.classList.add("focus");
+  if(oldNode.classList) oldNode.classList.remove("focus");
+  oldNode = node;
 }
 
+
 function keyListener(e){
-  //e.preventDefault();
+  
+  //e.stopPropagation();
   switch(e.key){
   case "ArrowLeft": clickLeftLightBox(); break;
   case "ArrowRight": clickRightLightBox(); break;
   case "Escape": closeEventListener(); break;
   case "Tab": setFocus(e); break;
+  case " ": readPauseMedia(e); break;
   default : break;
   }
 }
+function readPauseMedia(e){
+  console.log("space");
 
+  let find = findIndex();
+  let vidNode = virtualJSON.media.find(el => el.id == find.mediaId);
+  if(vidNode.video)console.log("vidéo spo")
+}
