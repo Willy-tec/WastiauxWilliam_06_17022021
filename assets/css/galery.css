@@ -384,7 +384,7 @@ h2 {
 }
 
 .gallery_frame a:focus {
-  border: .2rem dashed black;
+  border: .1  rem dotted black;
   border-radius: 5px;
   outline: none;
 }
@@ -873,6 +873,6 @@ input:invalid, textarea:invalid {
 }
 
 *:focus, .focus {
-  outline: .2rem dashed black;
+  outline: .1rem dotted black;
 }
 /*# sourceMappingURL=galery.css.map */

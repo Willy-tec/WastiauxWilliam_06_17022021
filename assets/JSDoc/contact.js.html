@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let contactButton = document.querySelector(".contact_button");
+/**
+ * Classe permettant le suivi des tabulations au sein de la modal Contact
+ * @class
+ */
+function modalTabulator(){
+  this.current = 0;
+  /**
+   * Défini le focus sur la cible du tableau visé par this.current
+   * @function
+   */
+  this.setFocus= ()=> this.array[this.current].focus();
+  /**
+   * Incrémente la valeur de this.current, qui représente l'index a cibler par le focus
+   * @function
+   */
+  this.next= ()=>{
+    this.current++;
+    if(this.current>this.array.length-1)this.current = 0;
+    this.setFocus();
+  };
+  /**
+   * Initialise le tableau contenant les inputs a cibler lors de la tabulation
+   * @function
+   */
+  this.init = ()=>{
+    this.array = document.querySelectorAll(".modal_dialog input, .modal_dialog textarea, .modal_dialog button");
+    this.setFocus();
+  };
+}
+let md = new modalTabulator();
+
+/**
+ * Affiche la modale Contact lors du click sur le bouton "contact"
+ * @function
+ * @listens cLick
+ * @fires modalKeyListener
+ */
+contactButton.addEventListener("click", ()=>{
+  document.querySelector(".modal_bg").style.display = "block";
+  window.addEventListener("keydown", modalKeyListener);
+  md.init();
+});
+
+/**
+ * Listener qui permet de choisir l'action approprié selon la touche "tabulation", ou "escape"
+ * (Empêche le fonctionement par défaut de la touche "tabulation")
+ * @function
+ * @param {event} evt 
+ * @listens keyEvent
+ */
+function modalKeyListener(evt){
+  if(evt.key=="Tab")evt.preventDefault();
+  switch (evt.key) {
+  case "Tab": md.next();break;
+  case "Escape": closeModalListener(); break;
+  default: break;
+  }
+}
+/**
+ * Listener que l'on actionne lorsque l'on veut fermer la modale contact
+ * @param {event} e 
+ */
+function closeModalListener(e){
+  document.querySelector(".modal_bg").style.display = "none";
+  window.removeEventListener("keydown", modalKeyListener);
+  document.querySelector("a").focus();
+ // document.querySelector("a").blur();
+  console.log(e)
+}
+
+/**
+ * Ecouter le formulaire et renvoyer les info de contact, ainsi que le message dans la console de votre navigateur
+ */
+document.querySelector("form").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  console.log(`
+  Prénom: ${md.array[1].value};
+  Nom: ${md.array[2].value};
+  email: ${md.array[3].value};
+  message: ${md.array[4].value}`);
+  closeModalListener();
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Artiste.html">Artiste</a></li><li><a href="Fabric.html">Fabric</a></li><li><a href="Media.html">Media</a></li><li><a href="modalTabulator.html">modalTabulator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLike">addLike</a></li><li><a href="global.html#addOrderListListener">addOrderListListener</a></li><li><a href="global.html#clickLeftLightBox">clickLeftLightBox</a></li><li><a href="global.html#clickListenerOrderList">clickListenerOrderList</a></li><li><a href="global.html#clickRightLightBox">clickRightLightBox</a></li><li><a href="global.html#closeEventListener">closeEventListener</a></li><li><a href="global.html#closeModalListener">closeModalListener</a></li><li><a href="global.html#fillContact">fillContact</a></li><li><a href="global.html#findIndex">findIndex</a></li><li><a href="global.html#frameClickListener">frameClickListener</a></li><li><a href="global.html#getUrlParam">getUrlParam</a></li><li><a href="global.html#keyListener">keyListener</a></li><li><a href="global.html#makeListTag">makeListTag</a></li><li><a href="global.html#modalKeyListener">modalKeyListener</a></li><li><a href="global.html#orderButton">orderButton</a></li><li><a href="global.html#orderBy">orderBy</a></li><li><a href="global.html#orderByDate">orderByDate</a></li><li><a href="global.html#orderByPopularity">orderByPopularity</a></li><li><a href="global.html#orderByTitle">orderByTitle</a></li><li><a href="global.html#removeOrderListListener">removeOrderListListener</a></li><li><a href="global.html#selectArtiste">selectArtiste</a></li><li><a href="global.html#selectMedia">selectMedia</a></li><li><a href="global.html#setFocus">setFocus</a></li><li><a href="global.html#setImgToPrint">setImgToPrint</a></li><li><a href="global.html#setLikeBox">setLikeBox</a></li><li><a href="global.html#setLikeListener">setLikeListener</a></li><li><a href="global.html#setOrder">setOrder</a></li><li><a href="global.html#updatePriceBox">updatePriceBox</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sat Apr 03 2021 21:03:43 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

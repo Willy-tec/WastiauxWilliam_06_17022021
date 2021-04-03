@@ -1,8 +1,23 @@
+/**
+ * Classe fabric qui retourne une node formaté selon les données transmise, et selon les critères : destination galerie ou lightbox. Format du média : image ou vidéo.
+ * @class
+ */
 class Fabric {
+  /**
+   * Initialise les valeurs de la fabric avec les données transmises issu du fichier json d'openclass room
+   * @param {object} artiste 
+   * @param {object} media 
+   */
   constructor(artiste, media) {
     this.artiste = artiste;
     this.media = media;
   }
+  /**
+   * Permet de définir la destination possible: "gallery" ou "lightbox"
+   * @param {string} destination 
+   * @throws Error("Mauvais tag img/vid")
+   * @returns {HTMLElement}
+   */
   render(destination) {
     if (destination == "gallery") {
       if (this.media.image) return this.renderImg();
@@ -14,7 +29,11 @@ class Fabric {
       else throw Error("Mauvais tag img/vid");
     }
   }
-
+  /**
+   * Création de la node html qui contient tout les éléments pour afficher l'image dans la galerie correctement.
+   * @function
+   * @returns {HTMLElement}
+   */
   renderImg() {
     let str = `<div class="gallery_frame" data-id=${this.media.id}>
     <a href="javascript:void(0)" tabindex="0" >
@@ -32,7 +51,11 @@ class Fabric {
   </div>`;
     return str;
   }
-
+  /**
+   * Création de la node html qui contient tout les éléments pour afficher la vidéo dans la galerie correctement.
+   * @function
+   * @returns {HTMLElement}
+   */
   renderVid() {
     let str = `<div class="gallery_frame" data-id=${this.media.id}>
   <a href="javascript:void(0)" tabindex="0">
@@ -53,7 +76,11 @@ class Fabric {
 </div>`;
     return str;
   }
-
+  /**
+   * Création de la node html qui contient tout les éléments pour afficher l'image dans la lightbox correctement.
+   * @function
+   * @returns {HTMLElement}
+   */
   renderImgLightbox() {
     let str = `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
     <img src="../image/full-size/${this.artiste.folderName}/${this.media.image}" alt="${this.media.altText}">
@@ -61,7 +88,11 @@ class Fabric {
   </div>`;
     return str;
   }
-
+  /**
+   * Création de la node html qui contient tout les éléments pour afficher la vidéo dans la lightbox correctement.
+   * @function
+   * @returns {HTMLElement}
+   */
   renderVidLightbox() {
     let str = `<div class="lightbox_frame_principal_media" data-id=${this.media.id} style="display: none;">
       <video src="../image/full-size/${this.artiste.folderName}/${this.media.video}" controls=""></video>

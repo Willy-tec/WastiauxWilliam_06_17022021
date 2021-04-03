@@ -1,24 +1,20 @@
-# Fisheye
+<h1>Fisheye</h1>
+<h2>Consignes:</h2>
+<p>Avec votre cheffe Amanda et le Designer UI, vous venez de faire une réunion de lancement du projet avec un nouveau client, FishEye. FishEye est un site web qui permet aux photographes indépendants de présenter leurs meilleurs travaux. Ils ont récemment levé des fonds et aimeraient mettre à jour leur site web.</p>
 
-Concevoir un site accessible permettant la diffusion de media type photo/vidéo appartenant à différent photographe.
-
-https://willy-tec.github.io/WastiauxWilliam_06_17022021/
-
-
-/**
- * 
- * @param {number} a
- * @returns {number}
- */
-
-/**
-  * 
- */
+<a href="https://willy-tec.github.io/WastiauxWilliam_06_17022021/">Visiter le site</a>
+<h2>Livrables:</h2>
+<p>Pour ce projet, vous aurez besoin de créer les livrables suivants :
+<ul>
+  <li>Un dépôt de code sur GitHub avec des fichiers HTML, CSS et JavaScript.</li>
+  <li>Une version mise à jour du JSON (avec alt-text).</li>
+</ul>
+</p>
 
  <div class="c-media">
 	<figure class="o-skeleton o-skeleton--horizontal u-relative">
 		<a class="u-block u-size-full u-absolute u-left u-top" href="#">
-			<img decoding="async" referrerpolicy="no-referrer" class="u-size-full" src="https://source.unsplash.com/weekly?water" loading="lazy" alt="Angels there and shore with or. The visiter chamber clasp.">
+			<img decoding="async" referrerpolicy="no-referrer" class="u-size-full" src="https://willy-tec.github.io/WastiauxWilliam_06_17022021/assets/html/galery.html?artisteId=527" loading="lazy" alt="Picture take from a boat on a river. We see rock and river">
 		</a>
 	</figure>
 </div>
