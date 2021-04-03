@@ -14,7 +14,7 @@
  <div class="c-media">
 	<figure class="o-skeleton o-skeleton--horizontal u-relative">
 		<a class="u-block u-size-full u-absolute u-left u-top" href="#">
-			<img decoding="async" referrerpolicy="no-referrer" class="u-size-full" src="https://willy-tec.github.io/WastiauxWilliam_06_17022021/assets/html/galery.html?artisteId=527" loading="lazy" alt="Picture take from a boat on a river. We see rock and river">
+			<img decoding="async" referrerpolicy="no-referrer" class="u-size-full" src="https://willy-tec.github.io/WastiauxWilliam_06_17022021/assets/image/full-size/Nabeel/Travel_Boat_Wanderer.jpg" loading="lazy" alt="Picture take from a boat on a river. We see rock and river">
 		</a>
 	</figure>
 </div>
