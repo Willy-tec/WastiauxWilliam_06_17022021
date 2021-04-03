@@ -65,8 +65,6 @@ function closeModalListener(e){
   document.querySelector(".modal_bg").style.display = "none";
   window.removeEventListener("keydown", modalKeyListener);
   document.querySelector("a").focus();
- // document.querySelector("a").blur();
-  console.log(e)
 }
 
 /**
