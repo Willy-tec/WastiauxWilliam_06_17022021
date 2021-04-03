@@ -24,19 +24,19 @@
     <main id="main">
         <article class="contact">
             <div class="contact_info" id="contact_info">
-                <h1 class="contact_info_name"></h1>
+                <h1 class="contact_info_name">.</h1>
                 <p class="contact_info_country"></p>
                 <p class="contact_info_quote"></p>
             </div>
             <input type="button" value="Contactez-moi" class="contact_button" tabindex="2">
             <div class="contact_blank_space"></div>
-            <img src="" alt="vide car non chargé" class="contact_img">
+            <img src="/" alt="vide car non chargé" class="contact_img">
         </article>
         <div class="order">
             <label for="Orderby" class="order_label">Trier par </label>
-            <div class="order-drop">
-              <button role="button" aria-haspopup="true" aria-expanded="false" tabindex="10" class="order_button" id="order_button"><span
-                      id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f</span></button>
+            <div class="order-drop" id="Orderby">
+              <button aria-haspopup="true" aria-expanded="false" tabindex="10" class="order_button" id="order_button"><span
+                      id="order_button_text">Popularité</span><span class="order_list_arrow">&#x2b9f;</span></button>
               <ul class="order_list" id="order_list" role="listbox" aria-labelledby="Orderby" >
                   <li ><a role="option" class="order_list_option" tabindex="11" href="#Popularity" >Popularité</a></li>
                   <li><a role="option" class="order_list_option" tabindex="12" href="#Date">Date</a></li>
@@ -52,17 +52,17 @@
             <div class="lightbox_blank"></div>
             <div class="lightbox_frame_left">
                 <button onclick="javascript:clickLeftLightBox()"  >
-                    <img class="lightbox_frame_left_arrow" alt="Previous image" src="../image/full-size/svg/left.svg"></img>
+                    <img class="lightbox_frame_left_arrow" alt="Previous image" src="../image/full-size/svg/left.svg">
                 </button>
             </div>
             <div class="lightbox_frame_principal">
             </div>
             <div class="lightbox_frame_right">
                 <button onclick="javascript:closeEventListener()" >
-                    <img class="lightbox_frame_right_cross" alt="cross button for closing lightbox" src="../image/full-size/svg/cross.svg"></img>
+                    <img class="lightbox_frame_right_cross" alt="cross button for closing lightbox" src="../image/full-size/svg/cross.svg">
                 </button>
                 <button  onclick="javascript:clickRightLightBox()"  >
-                    <img class="lightbox_frame_right_arrow" alt="Next image" src="../image/full-size/svg/right.svg"></img>
+                    <img class="lightbox_frame_right_arrow" alt="Next image" src="../image/full-size/svg/right.svg">
                 </button>
                 <div class="lightbox_blank_right"></div>
             </div>
@@ -73,10 +73,10 @@
     <div class="modal_bg">
         <form  class="modal_dialog">
             <button type="button" class="modal_dialog_crossButton" onclick="closeModalListener(event)">X</button>
-            <h2 class="modal_dialog_title">
+            <span class="modal_dialog_title">
                 <p>Contactez-moi </p>
                 <p class="modal_dialog_title_name">Mimi Keel</p>
-            </h2>
+            </span>
             <label class="modal_dialog_label" for="FirstName">Prénom</label>
             <input class="modal_dialog_input" type="text" name="FirstName" minlength=3 pattern="[a-zA-Z -]+" id="FirstName" required>
             <label class="modal_dialog_label" for="LastName">Nom</label>
@@ -84,7 +84,7 @@
             <label class="modal_dialog_label" for="Email">Email</label>
             <input class="modal_dialog_input" type="Email" name="Email" id="Email" required pattern="[a-zA-Z.-]+@[a-zA-Z]+[.][a-zA-Z]+">
             <label class="modal_dialog_label" for="Message">Votre message</label>
-            <textarea class="modal_dialog_input_message" type="text" name="Message" id="Message" minlength=10 required></textarea>
+            <textarea class="modal_dialog_input_message" rows="4" maxlength="1000" name="Message" id="Message" minlength=10 required></textarea>
             <input class="modal_dialog_submit" type="submit" value="Envoyer">
         </form>
 
