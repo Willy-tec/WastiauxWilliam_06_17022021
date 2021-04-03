@@ -1,9 +1,11 @@
 <h1>Fisheye</h1>
-<h2>Consignes:</h2>
+<h2>Consignes :</h2>
 <p>Avec votre cheffe Amanda et le Designer UI, vous venez de faire une réunion de lancement du projet avec un nouveau client, FishEye. FishEye est un site web qui permet aux photographes indépendants de présenter leurs meilleurs travaux. Ils ont récemment levé des fonds et aimeraient mettre à jour leur site web.</p>
-
+<h2>Maquette à suivre :</h2>
+<a href="https://www.figma.com/file/pt8xJxC1QffW4HX16QhGZJ/UI-Design-FishEye-FR?node-id=0%3A1">Voir sur Figma</a>
+<h2>Résultat :</h2>
 <a href="https://willy-tec.github.io/WastiauxWilliam_06_17022021/">Visiter le site</a>
-<h2>Livrables:</h2>
+<h2>Livrables :</h2>
 <p>Pour ce projet, vous aurez besoin de créer les livrables suivants :
 <ul>
   <li>Un dépôt de code sur GitHub avec des fichiers HTML, CSS et JavaScript.</li>
