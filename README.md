@@ -12,7 +12,8 @@
   <li>Une version mise à jour du JSON (avec alt-text).</li>
 </ul>
 </p>
-
+<h3>JSDoc</h3>
+<p>Afin de rendre la maintenance du site plus facile, je mets à disposition une <a href="https://willy-tec.github.io/WastiauxWilliam_06_17022021/assets/JSDoc/">documentation</a> généré automatiquement via JSDoc</p>
  <div class="c-media">
 	<figure class="o-skeleton o-skeleton--horizontal u-relative">
 		<a class="u-block u-size-full u-absolute u-left u-top" href="#">
